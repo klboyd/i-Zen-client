@@ -8,7 +8,8 @@ import {
   Alert,
   Button
 } from "react-native";
-import { login } from "../APIManager";
+import { login } from "../modules/APIManager";
+import Colors from "../modules/Colors";
 
 const LoginScreen = props => {
   const [username, setUsername] = useState("");
@@ -25,8 +26,11 @@ const LoginScreen = props => {
 
   return (
     <View style={{ ...styles.screen, ...props.style }}>
+      <View style={styles.welcomeContainer}>
+        <Text style={styles.welcomeMessage}>Welcome to i-Zen!</Text>
+        <Text style={styles.welcomeMessage}>Please log in</Text>
+      </View>
       <View style={styles.usernameContainer}>
-        {/* <Text style={styles.usernameLabel}>Username: </Text> */}
         <TextInput
           style={styles.input}
           placeholder="Username"
@@ -35,7 +39,6 @@ const LoginScreen = props => {
         />
       </View>
       <View style={styles.passwordContainer}>
-        {/* <Text style={styles.usernameLabel}>Username: </Text> */}
         <TextInput
           style={styles.input}
           placeholder="Password"
@@ -44,7 +47,22 @@ const LoginScreen = props => {
           onChangeText={text => setPassword(text)}
         />
       </View>
-      <Button title="Login" onPress={loginHandler} />
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.loginButton}
+          color={Colors.primary}
+          // color="#464bb4"
+          title="Login"
+          onPress={loginHandler}
+        />
+        <Text style={styles.buttonChoiceText}>or</Text>
+        <Button
+          style={styles.registerButton}
+          color={Colors.secondary}
+          // color="#46b4af"
+          title="Register"
+        />
+      </View>
     </View>
   );
 };
@@ -56,6 +74,13 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-start"
+  },
+  welcomeContainer: {
+    alignItems: "center",
+    marginBottom: 20
+  },
+  welcomeMessage: {
+    fontSize: 30
   },
   usernameContainer: {
     flexDirection: "row",
@@ -79,6 +104,21 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     textAlign: "center"
+  },
+  buttonContainer: {
+    alignItems: "center",
+    width: "80%",
+    marginTop: 20
+  },
+  buttonChoiceText: {
+    fontSize: 20,
+    marginVertical: 20
+  },
+  loginButton: {
+    fontWeight: "bold"
+  },
+  registerButton: {
+    color: "#46b4af"
   }
 });
 

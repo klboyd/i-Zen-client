@@ -5,7 +5,8 @@ import Content from "./src/components/Content";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./src/screens/LoginScreen";
-import { logout } from "./src/APIManager";
+import { logout } from "./src/modules/APIManager";
+import Colors from "./src/modules/Colors";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -17,7 +18,6 @@ export default function App() {
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      // await AsyncStorage.removeItem("iZen-token");
       const token = await AsyncStorage.getItem("iZen-token");
       token && setIsAuthenticated(true);
     };
@@ -52,7 +52,7 @@ const Stack = createStackNavigator();
 const styles = StyleSheet.create({
   headerStyle: {
     height: 80,
-    backgroundColor: "#4682b4aa"
+    backgroundColor: Colors.header
   },
   headerTitleStyle: {
     color: "#000"
