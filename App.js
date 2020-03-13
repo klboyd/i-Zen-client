@@ -1,37 +1,48 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, AsyncStorage, Text, View, Button } from "react-native";
 import Header from "./src/components/Header/Header";
 import Content from "./src/components/Content";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./src/screens/LoginScreen";
+import { logout } from "./src/APIManager";
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const logoutHandler = async () => {
+    await logout();
+    setIsAuthenticated(false);
+  };
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      // await AsyncStorage.removeItem("iZen-token");
+      const token = await AsyncStorage.getItem("iZen-token");
+      token && setIsAuthenticated(true);
+    };
+    checkAuthentication();
+  }, []);
+
   return (
-    // <View style={styles.container}>
-    //   {/* <Header /> */}
-    //   <Content />
-    // </View>
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            headerStyle: styles.headerStyle,
-            headerTitleAlign: "center"
-            // headerTitleStyle: styles.headerTitleStyle
-            // headerTitle: props => <Header {...props} />,
-            // headerLeft: () => (
-            //   <Button
-            //     onPress={() => alert("This is a button!")}
-            //     title="Back"
-            //     color="#000"
-            //   />
-            // )
-          }}
-        />
+        {!isAuthenticated ? (
+          <Stack.Screen
+            name="Login"
+            options={{
+              headerStyle: styles.headerStyle,
+              headerTitleAlign: "center"
+            }}>
+            {props => (
+              <LoginScreen {...props} setIsAuthenticated={setIsAuthenticated} />
+            )}
+          </Stack.Screen>
+        ) : (
+          <Stack.Screen name="Header" component={Header} />
+        )}
       </Stack.Navigator>
+      <Button title="logout" onPress={logoutHandler} />
     </NavigationContainer>
   );
 }

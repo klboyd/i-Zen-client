@@ -1,9 +1,27 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TextInput, Alert, Button } from "react-native";
+import {
+  StyleSheet,
+  AsyncStorage,
+  View,
+  Text,
+  TextInput,
+  Alert,
+  Button
+} from "react-native";
+import { login } from "../APIManager";
 
 const LoginScreen = props => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const loginHandler = async () => {
+    const response = await login({
+      username: username,
+      password: password
+    });
+
+    response && props.setIsAuthenticated(true);
+  };
 
   return (
     <View style={{ ...styles.screen, ...props.style }}>
@@ -26,12 +44,7 @@ const LoginScreen = props => {
           onChangeText={text => setPassword(text)}
         />
       </View>
-      <Button
-        title="Login"
-        onPress={() =>
-          Alert.alert(`Username: ${username}\nPassword: ${password}`)
-        }
-      />
+      <Button title="Login" onPress={loginHandler} />
     </View>
   );
 };
