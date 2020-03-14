@@ -8,7 +8,10 @@ import {
   Alert,
   Button
 } from "react-native";
-import { login } from "../APIManager";
+import { login } from "../modules/APIManager";
+import Colors from "../modules/Colors";
+import InputFieldContainer from "../components/Input/InputFieldContainer";
+import Screen from "../components/ScreenComponent/ScreenContainer";
 
 const LoginScreen = props => {
   const [username, setUsername] = useState("");
@@ -24,62 +27,61 @@ const LoginScreen = props => {
   };
 
   return (
-    <View style={{ ...styles.screen, ...props.style }}>
-      <View style={styles.usernameContainer}>
-        {/* <Text style={styles.usernameLabel}>Username: </Text> */}
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          value={username}
-          onChangeText={text => setUsername(text)}
+    <Screen style={{ ...styles.screen, ...props.style }}>
+      <View style={styles.welcomeContainer}>
+        <Text style={styles.welcomeMessage}>Welcome to i-Zen!</Text>
+        <Text style={styles.welcomeMessage}>Please log in</Text>
+      </View>
+      <InputFieldContainer
+        placeholder="Username"
+        value={username}
+        onChangeText={text => setUsername(text)}
+      />
+      <InputFieldContainer
+        placeholder="Password"
+        value={password}
+        secureTextEntry={true}
+        onChangeText={text => setPassword(text)}
+      />
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.button}
+          color={Colors.primary}
+          // color="#464bb4"
+          title="Login"
+          onPress={loginHandler}
+        />
+        <Text style={styles.buttonChoiceText}>or</Text>
+        <Button
+          style={styles.button}
+          color={Colors.secondary}
+          onPress={() => props.navigation.navigate("Register")}
+          title="Register"
         />
       </View>
-      <View style={styles.passwordContainer}>
-        {/* <Text style={styles.usernameLabel}>Username: </Text> */}
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          value={password}
-          secureTextEntry={true}
-          onChangeText={text => setPassword(text)}
-        />
-      </View>
-      <Button title="Login" onPress={loginHandler} />
-    </View>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    marginTop: 20,
+  welcomeContainer: {
+    alignItems: "center",
+    marginBottom: 20
+  },
+  welcomeMessage: {
+    fontSize: 30
+  },
+  buttonContainer: {
     flex: 1,
-    width: "100%",
     alignItems: "center",
-    justifyContent: "flex-start"
+    // width: "80%",
+    marginTop: 20
   },
-  usernameContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20
+  buttonChoiceText: {
+    fontSize: 20,
+    marginVertical: 20
   },
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20
-  },
-  usernameLabel: {
-    // height: "100%"
-  },
-  input: {
-    height: 40,
-    width: "60%",
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 10,
-    textAlign: "center"
-  }
+  button: {}
 });
 
 export default LoginScreen;
