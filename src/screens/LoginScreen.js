@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { login } from "../modules/APIManager";
 import Colors from "../modules/Colors";
+import InputFieldContainer from "../components/Input/InputFieldContainer";
 
 const LoginScreen = props => {
   const [username, setUsername] = useState("");
@@ -30,26 +31,20 @@ const LoginScreen = props => {
         <Text style={styles.welcomeMessage}>Welcome to i-Zen!</Text>
         <Text style={styles.welcomeMessage}>Please log in</Text>
       </View>
-      <View style={styles.usernameContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          value={username}
-          onChangeText={text => setUsername(text)}
-        />
-      </View>
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          value={password}
-          secureTextEntry={true}
-          onChangeText={text => setPassword(text)}
-        />
-      </View>
+      <InputFieldContainer
+        placeholder="Username"
+        value={username}
+        onChangeText={text => setUsername(text)}
+      />
+      <InputFieldContainer
+        placeholder="Password"
+        value={password}
+        secureTextEntry={true}
+        onChangeText={text => setPassword(text)}
+      />
       <View style={styles.buttonContainer}>
         <Button
-          style={styles.loginButton}
+          style={styles.button}
           color={Colors.primary}
           // color="#464bb4"
           title="Login"
@@ -57,9 +52,9 @@ const LoginScreen = props => {
         />
         <Text style={styles.buttonChoiceText}>or</Text>
         <Button
-          style={styles.registerButton}
+          style={styles.button}
           color={Colors.secondary}
-          // color="#46b4af"
+          onPress={() => props.navigation.navigate("Register")}
           title="Register"
         />
       </View>
@@ -71,7 +66,7 @@ const styles = StyleSheet.create({
   screen: {
     marginTop: 20,
     flex: 1,
-    width: "100%",
+    // width: "100%",
     alignItems: "center",
     justifyContent: "flex-start"
   },
@@ -82,44 +77,17 @@ const styles = StyleSheet.create({
   welcomeMessage: {
     fontSize: 30
   },
-  usernameContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20
-  },
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20
-  },
-  usernameLabel: {
-    // height: "100%"
-  },
-  input: {
-    height: 40,
-    width: "60%",
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 10,
-    textAlign: "center"
-  },
   buttonContainer: {
+    flex: 1,
     alignItems: "center",
-    width: "80%",
+    // width: "80%",
     marginTop: 20
   },
   buttonChoiceText: {
     fontSize: 20,
     marginVertical: 20
   },
-  loginButton: {
-    fontWeight: "bold"
-  },
-  registerButton: {
-    color: "#46b4af"
-  }
+  button: {}
 });
 
 export default LoginScreen;

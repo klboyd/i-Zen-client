@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./src/screens/LoginScreen";
 import { logout } from "./src/modules/APIManager";
 import Colors from "./src/modules/Colors";
+import RegisterScreen from "./src/screens/RegisterScreen";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,16 +29,34 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         {!isAuthenticated ? (
-          <Stack.Screen
-            name="Login"
-            options={{
-              headerStyle: styles.headerStyle,
-              headerTitleAlign: "center"
-            }}>
-            {props => (
-              <LoginScreen {...props} setIsAuthenticated={setIsAuthenticated} />
-            )}
-          </Stack.Screen>
+          <>
+            <Stack.Screen
+              name="Login"
+              options={{
+                headerStyle: styles.headerStyle,
+                headerTitleAlign: "center"
+              }}>
+              {props => (
+                <LoginScreen
+                  {...props}
+                  setIsAuthenticated={setIsAuthenticated}
+                />
+              )}
+            </Stack.Screen>
+            <Stack.Screen
+              name="Register"
+              options={{
+                headerStyle: styles.headerStyle,
+                headerTitleAlign: "center"
+              }}>
+              {props => (
+                <RegisterScreen
+                  {...props}
+                  setIsAuthenticated={setIsAuthenticated}
+                />
+              )}
+            </Stack.Screen>
+          </>
         ) : (
           <Stack.Screen name="Header" component={Header} />
         )}
