@@ -1,8 +1,13 @@
 import { Alert, Platform } from "react-native";
 import { AsyncStorage } from "react-native";
+import Constants from "expo-constants";
+import { NET_ADDR } from "react-native-dotenv";
 
-const baseUrl =
-  Platform.OS === "android" ? "http://10.0.2.2:8000" : "http://127.0.0.1:8000";
+const baseUrl = Constants.isDevice
+  ? `http://${NET_ADDR}:8000`
+  : Platform.OS === "android"
+  ? "http://10.0.2.2:8000"
+  : "http://127.0.0.1:8000";
 
 const setToken = async token => {
   try {

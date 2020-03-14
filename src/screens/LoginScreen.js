@@ -11,6 +11,7 @@ import {
 import { login } from "../modules/APIManager";
 import Colors from "../modules/Colors";
 import InputFieldContainer from "../components/Input/InputFieldContainer";
+import Screen from "../components/ScreenComponent/ScreenContainer";
 
 const LoginScreen = props => {
   const [username, setUsername] = useState("");
@@ -26,7 +27,7 @@ const LoginScreen = props => {
   };
 
   return (
-    <View style={{ ...styles.screen, ...props.style }}>
+    <Screen style={{ ...styles.screen, ...props.style }}>
       <View style={styles.welcomeContainer}>
         <Text style={styles.welcomeMessage}>Welcome to i-Zen!</Text>
         <Text style={styles.welcomeMessage}>Please log in</Text>
@@ -58,18 +59,11 @@ const LoginScreen = props => {
           title="Register"
         />
       </View>
-    </View>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    marginTop: 20,
-    flex: 1,
-    // width: "100%",
-    alignItems: "center",
-    justifyContent: "flex-start"
-  },
   welcomeContainer: {
     alignItems: "center",
     marginBottom: 20

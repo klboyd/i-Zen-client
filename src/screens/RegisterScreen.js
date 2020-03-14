@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TextInput } from "react-native";
 import InputField from "../components/Input/InputField";
 import InputFieldContainer from "../components/Input/InputFieldContainer";
+import Screen from "../components/ScreenComponent/ScreenContainer";
 
 const RegisterScreen = props => {
   const [username, setUsername] = useState("");
@@ -11,8 +12,8 @@ const RegisterScreen = props => {
   const [lastname, setLastname] = useState("");
 
   return (
-    <View styles={{ ...styles.screen, ...props.style }}>
-      <Text>RegisterScreen</Text>
+    <Screen style={{ ...styles.screen, ...props.style }}>
+      <Text style={styles.registerMessage}>Register a new Account</Text>
       <InputFieldContainer
         placeholder="Username"
         value={username}
@@ -25,17 +26,22 @@ const RegisterScreen = props => {
         onChangeText={text => setPassword(text)}
       />
 
+      <InputFieldContainer
+        placeholder="Verify Password"
+        value={verifyPassword}
+        secureTextEntry={true}
+        onChangeText={text => setVerifyPassword(text)}
+      />
       <TextInput />
       <TextInput />
-      <TextInput />
-    </View>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    width: "100%",
-    alignItems: "center"
+  registerMessage: {
+    fontSize: 30,
+    marginBottom: 20
   },
   inputContainer: {
     flexDirection: "row",
