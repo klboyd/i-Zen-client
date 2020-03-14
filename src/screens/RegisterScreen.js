@@ -42,6 +42,7 @@ const RegisterScreen = props => {
       <InputFieldContainer
         placeholder="Username"
         value={username}
+        autoCapitalize="none"
         onChangeText={text => setUsername(text)}
       />
       <InputFieldContainer

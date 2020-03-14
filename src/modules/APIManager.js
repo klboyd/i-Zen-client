@@ -3,22 +3,38 @@ import { AsyncStorage } from "react-native";
 import Constants from "expo-constants";
 import { NET_ADDR } from "react-native-dotenv";
 
-const baseUrl = Constants.isDevice
-  ? `http://${NET_ADDR}:8000`
-  : Platform.OS === "android"
-  ? "http://10.0.2.2:8000"
-  : "http://127.0.0.1:8000";
+let baseUrl;
+if (
+  Constants.isDevice &&
+  (Platform.OS === "android" || Platform.OS === "ios")
+) {
+  baseUrl = `http://${NET_ADDR}:8000`;
+} else if (Platform.OS === "android") {
+  baseUrl = "http://10.0.2.2:8000";
+} else {
+  baseUrl = "http://127.0.0.1:8000";
+}
 
 const setToken = async token => {
   try {
-    await AsyncStorage.setItem("iZen-token", token);
+    await AsyncStorage.setItem("iZen-token", `Token ${token}`);
   } catch (error) {
     throw Exception("Error saving token:", error);
   }
 };
 
+const getToken = async () => {
+  return await AsyncStorage.getItem("iZen-token");
+};
+
 const getAll = async resource => {
-  const response = await fetch(`${baseUrl}/${resource}`);
+  const token = await getToken();
+  const response = await fetch(`${baseUrl}/${resource}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    }
+  });
   return response.json();
 };
 
@@ -78,4 +94,4 @@ const register = async userDetails => {
 const logout = async () => {
   return await AsyncStorage.removeItem("iZen-token");
 };
-export { register, login, logout };
+export { getAll, register, login, logout };

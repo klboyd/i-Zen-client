@@ -9,7 +9,8 @@ const Screen = props => {
 
 const styles = StyleSheet.create({
   screen: {
-    marginTop: 20,
+    // marginTop: 20,
+    borderTopWidth: 1,
     flex: 1,
     // width: "100%",
     alignItems: "center",
