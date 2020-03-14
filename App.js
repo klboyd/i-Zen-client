@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, AsyncStorage, Text, View, Button } from "react-native";
-import Header from "./src/components/Header/Header";
+import HeaderButton from "./src/components/Header/HeaderButton";
 import Content from "./src/components/Content";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -8,6 +8,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import { logout } from "./src/modules/APIManager";
 import Colors from "./src/modules/Colors";
 import RegisterScreen from "./src/screens/RegisterScreen";
+import ProgressionScreen from "./src/screens/ProgressionScreen";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -58,10 +59,19 @@ export default function App() {
             </Stack.Screen>
           </>
         ) : (
-          <Stack.Screen name="Header" component={Header} />
+          <Stack.Screen
+            name="iZen"
+            options={{
+              headerStyle: styles.headerStyle,
+              headerTitleAlign: "center",
+              headerLeft: () => (
+                <HeaderButton title="Logout" onPress={logoutHandler} />
+              )
+            }}>
+            {props => <ProgressionScreen {...props} />}
+          </Stack.Screen>
         )}
       </Stack.Navigator>
-      <Button title="logout" onPress={logoutHandler} />
     </NavigationContainer>
   );
 }
@@ -70,7 +80,7 @@ const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
   headerStyle: {
-    height: 80,
+    height: 100,
     backgroundColor: Colors.header
   },
   headerTitleStyle: {

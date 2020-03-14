@@ -6,7 +6,8 @@ import {
   Text,
   TextInput,
   Alert,
-  Button
+  Button,
+  TouchableOpacity
 } from "react-native";
 import { login } from "../modules/APIManager";
 import Colors from "../modules/Colors";
@@ -35,6 +36,7 @@ const LoginScreen = props => {
       <InputFieldContainer
         placeholder="Username"
         value={username}
+        autoCapitalize="none"
         onChangeText={text => setUsername(text)}
       />
       <InputFieldContainer
@@ -44,20 +46,20 @@ const LoginScreen = props => {
         onChangeText={text => setPassword(text)}
       />
       <View style={styles.buttonContainer}>
-        <Button
+        <TouchableOpacity
           style={styles.button}
           color={Colors.primary}
           // color="#464bb4"
-          title="Login"
-          onPress={loginHandler}
-        />
+          onPress={loginHandler}>
+          <Text>Login</Text>
+        </TouchableOpacity>
         <Text style={styles.buttonChoiceText}>or</Text>
-        <Button
+        <TouchableOpacity
           style={styles.button}
-          color={Colors.secondary}
-          onPress={() => props.navigation.navigate("Register")}
-          title="Register"
-        />
+          color="red"
+          onPress={() => props.navigation.navigate("Register")}>
+          <Text>Register</Text>
+        </TouchableOpacity>
       </View>
     </Screen>
   );
@@ -73,7 +75,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "flex-start",
     // width: "80%",
     marginTop: 20
   },
