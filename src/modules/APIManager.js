@@ -54,7 +54,26 @@ const login = async credentials => {
   }
 };
 
+const register = async userDetails => {
+  const response = await fetch(`${baseUrl}/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(userDetails)
+  });
+
+  const resJSON = await response.json();
+
+  if (resJSON && resJSON.token) {
+    await setToken(resJSON.token);
+  } else {
+    Alert.alert("Something went wrong and user was not created.");
+  }
+};
+
 const logout = async () => {
   return await AsyncStorage.removeItem("iZen-token");
 };
-export { login, logout };
+export { register, login, logout };

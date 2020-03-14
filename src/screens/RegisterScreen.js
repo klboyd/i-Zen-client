@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import { StyleSheet, View, Text, Button, Alert } from "react-native";
 import InputField from "../components/Input/InputField";
 import InputFieldContainer from "../components/Input/InputFieldContainer";
 import Screen from "../components/ScreenComponent/ScreenContainer";
+import Colors from "../modules/Colors";
+import { register } from "../modules/APIManager";
 
 const RegisterScreen = props => {
   const [username, setUsername] = useState("");
@@ -10,6 +12,20 @@ const RegisterScreen = props => {
   const [verifyPassword, setVerifyPassword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+
+  const registerNewUserHandler = async () => {
+    if (password === verifyPassword) {
+      await register({
+        username: username,
+        password: password,
+        first_name: firstname,
+        last_name: lastname
+      });
+      await props.setIsAuthenticated(true);
+    } else {
+      Alert.alert("Passwords do not match.");
+    }
+  };
 
   return (
     <Screen style={{ ...styles.screen, ...props.style }}>
@@ -28,12 +44,29 @@ const RegisterScreen = props => {
 
       <InputFieldContainer
         placeholder="Verify Password"
+        required
         value={verifyPassword}
         secureTextEntry={true}
         onChangeText={text => setVerifyPassword(text)}
       />
-      <TextInput />
-      <TextInput />
+      <InputFieldContainer
+        placeholder="First name (optional)"
+        value={firstname}
+        onChangeText={text => setFirstname(text)}
+      />
+      <InputFieldContainer
+        placeholder="Last name (optional)"
+        value={lastname}
+        onChangeText={text => setLastname(text)}
+      />
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.button}
+          color={Colors.secondary}
+          onPress={registerNewUserHandler}
+          title="Register"
+        />
+      </View>
     </Screen>
   );
 };
