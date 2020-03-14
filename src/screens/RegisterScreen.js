@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Button, Alert } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  Alert,
+  AsyncStorage
+} from "react-native";
 import InputField from "../components/Input/InputField";
 import InputFieldContainer from "../components/Input/InputFieldContainer";
 import Screen from "../components/ScreenComponent/ScreenContainer";
@@ -15,13 +22,15 @@ const RegisterScreen = props => {
 
   const registerNewUserHandler = async () => {
     if (password === verifyPassword) {
-      await register({
+      const response = await register({
         username: username,
         password: password,
         first_name: firstname,
         last_name: lastname
       });
-      await props.setIsAuthenticated(true);
+      if (await AsyncStorage.getItem("iZen-token")) {
+        await props.setIsAuthenticated(true);
+      }
     } else {
       Alert.alert("Passwords do not match.");
     }
