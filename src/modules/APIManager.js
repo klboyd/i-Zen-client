@@ -68,8 +68,10 @@ const register = async userDetails => {
 
   if (resJSON && resJSON.token) {
     await setToken(resJSON.token);
+  } else if (resJSON.error) {
+    Alert.alert(resJSON.error);
   } else {
-    Alert.alert("Something went wrong and user was not created.");
+    Alert.alert("Something went wrong and account was not created.");
   }
 };
 
