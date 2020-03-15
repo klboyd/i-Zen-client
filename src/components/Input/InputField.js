@@ -3,7 +3,10 @@ import { StyleSheet, TextInput, ShadowPropTypesIOS } from "react-native";
 
 const InputField = props => {
   return (
-    <TextInput style={{ ...styles.input, ...props.style }} {...props}>
+    <TextInput
+      placeholderTextColor="grey"
+      style={{ ...styles.input, ...props.inputStyle }}
+      {...props}>
       {props.children}
     </TextInput>
   );
@@ -16,7 +19,8 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     borderRadius: 10,
-    textAlign: "center"
+    textAlign: "center",
+    color: "black"
   }
 });
 

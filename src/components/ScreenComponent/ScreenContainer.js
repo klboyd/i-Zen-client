@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-const Screen = props => {
+const ScreenContainer = props => {
   return (
     <View style={{ ...styles.screen, ...props.style }}>{props.children}</View>
   );
@@ -10,6 +10,7 @@ const Screen = props => {
 const styles = StyleSheet.create({
   screen: {
     // marginTop: 20,
+    // marginBottom: 50,
     borderTopWidth: 1,
     flex: 1,
     // width: "100%",
@@ -18,4 +19,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Screen;
+export default ScreenContainer;
