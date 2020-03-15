@@ -53,6 +53,19 @@ const post = async (resource, newItem) => {
   return results.json();
 };
 
+const remove = async (resource, id) => {
+  const token = await getToken();
+
+  await fetch(`${baseUrl}/${resource}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    }
+  });
+  return;
+};
+
 const login = async credentials => {
   const response = await fetch(`${baseUrl}/login`, {
     method: "POST",
@@ -97,4 +110,4 @@ const register = async userDetails => {
 const logout = async () => {
   return await AsyncStorage.removeItem("iZen-token");
 };
-export { getAll, post, register, login, logout };
+export { getAll, post, remove, register, login, logout };

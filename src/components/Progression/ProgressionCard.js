@@ -1,14 +1,22 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Alert } from "react-native";
+import SwipeableCard from "../Card/SwipeableCard";
+import { remove } from "../../modules/APIManager";
 
 const ProgressionCard = props => {
+  const onLeftButtonPress = async () => {
+    await remove("progressions", Number(props.progression.id));
+    props.loadProgressions();
+  };
   return (
-    <View style={{ ...styles.card, ...props.style }}>
-      <Text style={styles.cardText}>{props.progression.name}</Text>
-      <Text style={styles.cardDescription}>
-        {props.progression.description}
-      </Text>
-    </View>
+    <SwipeableCard onLeftButtonPress={onLeftButtonPress}>
+      <View style={{ ...styles.card, ...props.style }}>
+        <Text style={styles.cardText}>{props.progression.name}</Text>
+        <Text style={styles.cardDescription}>
+          {props.progression.description}
+        </Text>
+      </View>
+    </SwipeableCard>
   );
 };
 
@@ -17,7 +25,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    borderBottomWidth: 1,
+    borderWidth: 0.5,
     paddingVertical: 5
   },
   cardText: {

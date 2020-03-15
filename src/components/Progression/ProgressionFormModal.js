@@ -18,6 +18,8 @@ const ProgressionFormModal = props => {
 
   const confirmFormHandler = async () => {
     await post("progressions", { name: name, description: description });
+    setName("");
+    setDescription("");
     props.onConfirm();
   };
 
