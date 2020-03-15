@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, AsyncStorage, Text, View, Button } from "react-native";
-import HeaderButton from "./src/components/Header/HeaderButton";
-import Content from "./src/components/Content";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import LoginScreen from "./src/screens/LoginScreen";
+
+import HeaderButton from "./src/components/Header/HeaderButton";
+import AddButton from "./src/components/Header/AddButton";
+
 import { logout } from "./src/modules/APIManager";
 import Colors from "./src/modules/Colors";
+
+import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import ProgressionScreen from "./src/screens/ProgressionScreen";
 
@@ -81,7 +84,7 @@ const Stack = createStackNavigator();
 const styles = StyleSheet.create({
   headerStyle: {
     height: 100,
-    backgroundColor: Colors.header
+    backgroundColor: Colors.light.background.header
   },
   headerTitleStyle: {
     color: "#000"

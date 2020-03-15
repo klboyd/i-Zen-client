@@ -7,9 +7,8 @@ import {
   Alert,
   AsyncStorage
 } from "react-native";
-import InputField from "../components/Input/InputField";
 import InputFieldContainer from "../components/Input/InputFieldContainer";
-import Screen from "../components/ScreenComponent/ScreenContainer";
+import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
 import Colors from "../modules/Colors";
 import { register } from "../modules/APIManager";
 
@@ -37,7 +36,7 @@ const RegisterScreen = props => {
   };
 
   return (
-    <Screen style={{ ...styles.screen, ...props.style }}>
+    <ScreenContainer style={{ ...styles.screen, ...props.style }}>
       <Text style={styles.registerMessage}>Register a new Account</Text>
       <InputFieldContainer
         placeholder="Username"
@@ -72,12 +71,12 @@ const RegisterScreen = props => {
       <View style={styles.buttonContainer}>
         <Button
           style={styles.button}
-          color={Colors.secondary}
+          color={Colors.light.background.secondary}
           onPress={registerNewUserHandler}
           title="Register"
         />
       </View>
-    </Screen>
+    </ScreenContainer>
   );
 };
 
