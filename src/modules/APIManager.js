@@ -29,6 +29,7 @@ const getToken = async () => {
 
 const getAll = async resource => {
   const token = await getToken();
+
   const response = await fetch(`${baseUrl}/${resource}`, {
     headers: {
       "Content-Type": "application/json",
@@ -38,17 +39,19 @@ const getAll = async resource => {
   return response.json();
 };
 
-// const post = async (resource, newItem) => {
-//   const results = await fetch(`${baseUrl}/${resource}`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Token ${sessionStorage.getItem("bangazon_token")}`
-//     },
-//     body: JSON.stringify(newItem)
-//   });
-//   return results.json();
-// },
+const post = async (resource, newItem) => {
+  const token = await getToken();
+
+  const results = await fetch(`${baseUrl}/${resource}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    },
+    body: JSON.stringify(newItem)
+  });
+  return results.json();
+};
 
 const login = async credentials => {
   const response = await fetch(`${baseUrl}/login`, {
@@ -94,4 +97,4 @@ const register = async userDetails => {
 const logout = async () => {
   return await AsyncStorage.removeItem("iZen-token");
 };
-export { getAll, register, login, logout };
+export { getAll, post, register, login, logout };

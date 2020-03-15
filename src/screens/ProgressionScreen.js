@@ -6,23 +6,27 @@ import ProgressionCard from "../components/Progression/ProgressionCard";
 import FooterComponent from "../components/Footer/FooterComponent";
 import ZenButton from "../components/ButtonComponent/ZenButton";
 import Colors from "../modules/Colors";
+import ProgressionFormModal from "../components/Progression/ProgressionFormModal";
 
 const ProgressionScreen = props => {
   const [progressions, setProgressions] = useState([]);
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const getProgressionsHandler = async () => {
     return await getAll("progressions");
   };
-  const addProgressionHandler = () =>
-    Alert.alert("Pressed the add progression button");
+  const addProgressionHandler = () => setIsFormVisible(true);
+  const hideFormModal = () => setIsFormVisible(false);
 
   useEffect(() => {
-    const loadProgressions = async () => {
-      const progressions = await getProgressionsHandler();
-      setProgressions(progressions);
-    };
-    loadProgressions();
-  }, [props.triggerProgressions]);
+    if (isFormVisible === false) {
+      const loadProgressions = async () => {
+        const progressions = await getProgressionsHandler();
+        setProgressions(progressions);
+      };
+      loadProgressions();
+    }
+  }, [isFormVisible]);
 
   return (
     <ScreenContainer style={{ ...styles.screen, ...props.style }}>
@@ -41,6 +45,11 @@ const ProgressionScreen = props => {
           <Text style={styles.addButtonText}>Add</Text>
         </ZenButton>
       </FooterComponent>
+      <ProgressionFormModal
+        onConfirm={hideFormModal}
+        onCancel={hideFormModal}
+        isFormVisible={isFormVisible}
+      />
     </ScreenContainer>
   );
 };
