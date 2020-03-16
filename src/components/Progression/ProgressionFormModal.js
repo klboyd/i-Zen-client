@@ -4,7 +4,7 @@ import FormModalContainer from "../Modal/FormModalContainer";
 import ZenButton from "../ButtonComponent/ZenButton";
 import Colors from "../../modules/Colors";
 import InputFieldContainer from "../Input/InputFieldContainer";
-import { post } from "../../modules/APIManager";
+import { postItem } from "../../modules/APIManager";
 
 const ProgressionFormModal = props => {
   const [name, setName] = useState("");
@@ -17,7 +17,7 @@ const ProgressionFormModal = props => {
   };
 
   const confirmFormHandler = async () => {
-    await post("progressions", { name: name, description: description });
+    await postItem("progressions", { name: name, description: description });
     setName("");
     setDescription("");
     props.onConfirm();

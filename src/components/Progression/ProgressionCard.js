@@ -1,12 +1,31 @@
 import React from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 import SwipeableCard from "../Card/SwipeableCard";
-import { remove } from "../../modules/APIManager";
+import { removeItem } from "../../modules/APIManager";
 
 const ProgressionCard = props => {
+  const removeProgessionCard = async () => {
+    await removeItem("progressions", Number(props.progression.id));
+    await props.loadProgressions();
+  };
+
   const onLeftButtonPress = async () => {
-    await remove("progressions", Number(props.progression.id));
-    props.loadProgressions();
+    Alert.alert(
+      "Delete this Progression?",
+      "It'll be gone for good!",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => removeProgessionCard()
+        }
+      ],
+      { cancelable: false }
+    );
   };
   return (
     <SwipeableCard onLeftButtonPress={onLeftButtonPress}>
