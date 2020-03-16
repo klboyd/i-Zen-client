@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 import SwipeableCard from "../Card/SwipeableCard";
 import { removeItem } from "../../modules/APIManager";
 import Colors from "../../modules/Colors";
+import ProgressionEditFormModal from "../Progression/ProgressionEditFormModal";
 
 const ProgressionCard = props => {
+  const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+
   const removeProgessionCard = async () => {
     await removeItem("progressions", Number(props.progression.id));
     await props.loadProgressions();
+  };
+
+  const onEditConfirm = () => {
+    setIsEditFormVisible(false);
+    props.loadProgressions();
   };
 
   const onLeftButtonPress = async () => {
@@ -29,7 +37,7 @@ const ProgressionCard = props => {
     );
   };
   const onRightButtonPress = async () => {
-    Alert.alert("Pushed the edit button");
+    setIsEditFormVisible(true);
   };
   return (
     <SwipeableCard
@@ -42,6 +50,12 @@ const ProgressionCard = props => {
           {props.progression.description}
         </Text>
       </View>
+      <ProgressionEditFormModal
+        onConfirm={onEditConfirm}
+        onCancel={() => setIsEditFormVisible(false)}
+        isEditFormVisible={isEditFormVisible}
+        cardIndex={props.cardIndex}
+      />
     </SwipeableCard>
   );
 };

@@ -39,6 +39,18 @@ const getAll = async resource => {
   return response.json();
 };
 
+const getOne = async (resource, id) => {
+  const token = await getToken();
+
+  const response = await fetch(`${baseUrl}/${resource}/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    }
+  });
+  return response.json();
+};
+
 const postItem = async (resource, newItem) => {
   const token = await getToken();
 
@@ -50,6 +62,24 @@ const postItem = async (resource, newItem) => {
         Authorization: token
       },
       body: JSON.stringify(newItem)
+    });
+    return results.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const putItem = async (resource, id, updatedItem) => {
+  const token = await getToken();
+
+  try {
+    const results = await fetch(`${baseUrl}/${resource}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token
+      },
+      body: JSON.stringify(updatedItem)
     });
     return results.json();
   } catch (error) {
@@ -117,4 +147,13 @@ const register = async userDetails => {
 const logout = async () => {
   return await AsyncStorage.removeItem("iZen-token");
 };
-export { getAll, postItem, removeItem, register, login, logout };
+export {
+  getAll,
+  getOne,
+  postItem,
+  putItem,
+  removeItem,
+  register,
+  login,
+  logout
+};

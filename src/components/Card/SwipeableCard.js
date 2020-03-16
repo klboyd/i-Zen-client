@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Button, Alert, Animated } from "react-native";
+import { StyleSheet, Animated } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
@@ -35,7 +35,7 @@ const SwipeableCard = props => {
     });
     return (
       <TouchableOpacity
-        style={styles.RightAction}
+        style={styles.rightAction}
         onPress={props.onRightButtonPress}
         title={"Delete"}>
         <Animated.Text
@@ -50,6 +50,7 @@ const SwipeableCard = props => {
       </TouchableOpacity>
     );
   };
+
   return (
     <Swipeable
       overshootLeft={false}
