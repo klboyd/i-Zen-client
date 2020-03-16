@@ -1,14 +1,41 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Alert } from "react-native";
+import SwipeableCard from "../Card/SwipeableCard";
+import { removeItem } from "../../modules/APIManager";
 
 const ProgressionCard = props => {
+  const removeProgessionCard = async () => {
+    await removeItem("progressions", Number(props.progression.id));
+    await props.loadProgressions();
+  };
+
+  const onLeftButtonPress = async () => {
+    Alert.alert(
+      "Delete this Progression?",
+      "It'll be gone for good!",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => removeProgessionCard()
+        }
+      ],
+      { cancelable: false }
+    );
+  };
   return (
-    <View style={{ ...styles.card, ...props.style }}>
-      <Text style={styles.cardText}>{props.progression.name}</Text>
-      <Text style={styles.cardDescription}>
-        {props.progression.description}
-      </Text>
-    </View>
+    <SwipeableCard onLeftButtonPress={onLeftButtonPress}>
+      <View style={{ ...styles.card, ...props.style }}>
+        <Text style={styles.cardText}>{props.progression.name}</Text>
+        <Text style={styles.cardDescription}>
+          {props.progression.description}
+        </Text>
+      </View>
+    </SwipeableCard>
   );
 };
 
@@ -17,7 +44,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    borderBottomWidth: 1,
+    borderWidth: 0.5,
     paddingVertical: 5
   },
   cardText: {

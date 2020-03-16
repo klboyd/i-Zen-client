@@ -18,12 +18,13 @@ const ProgressionScreen = props => {
   const addProgressionHandler = () => setIsFormVisible(true);
   const hideFormModal = () => setIsFormVisible(false);
 
+  const loadProgressions = async () => {
+    const progressions = await getProgressionsHandler();
+    setProgressions(progressions);
+  };
+
   useEffect(() => {
     if (isFormVisible === false) {
-      const loadProgressions = async () => {
-        const progressions = await getProgressionsHandler();
-        setProgressions(progressions);
-      };
       loadProgressions();
     }
   }, [isFormVisible]);
@@ -35,7 +36,10 @@ const ProgressionScreen = props => {
         style={{ width: "100%" }}
         data={progressions}
         renderItem={progression => (
-          <ProgressionCard progression={progression.item} />
+          <ProgressionCard
+            loadProgressions={loadProgressions}
+            progression={progression.item}
+          />
         )}
       />
       <FooterComponent>

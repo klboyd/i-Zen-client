@@ -39,18 +39,38 @@ const getAll = async resource => {
   return response.json();
 };
 
-const post = async (resource, newItem) => {
+const postItem = async (resource, newItem) => {
   const token = await getToken();
 
-  const results = await fetch(`${baseUrl}/${resource}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token
-    },
-    body: JSON.stringify(newItem)
-  });
-  return results.json();
+  try {
+    const results = await fetch(`${baseUrl}/${resource}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token
+      },
+      body: JSON.stringify(newItem)
+    });
+    return results.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const removeItem = async (resource, id) => {
+  const token = await getToken();
+  try {
+    const results = await fetch(`${baseUrl}/${resource}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token
+      }
+    });
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const login = async credentials => {
@@ -97,4 +117,4 @@ const register = async userDetails => {
 const logout = async () => {
   return await AsyncStorage.removeItem("iZen-token");
 };
-export { getAll, post, register, login, logout };
+export { getAll, postItem, removeItem, register, login, logout };
