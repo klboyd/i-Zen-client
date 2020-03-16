@@ -28,8 +28,14 @@ const ProgressionCard = props => {
       { cancelable: false }
     );
   };
+  const onRightButtonPress = async () => {
+    Alert.alert("Pushed the edit button");
+  };
   return (
-    <SwipeableCard onLeftButtonPress={onLeftButtonPress}>
+    <SwipeableCard
+      cardIndex={props.index}
+      onLeftButtonPress={onLeftButtonPress}
+      onRightButtonPress={onRightButtonPress}>
       <View style={{ ...styles.card, ...props.style }}>
         <Text style={styles.cardText}>{props.progression.name}</Text>
         <Text style={styles.cardDescription}>

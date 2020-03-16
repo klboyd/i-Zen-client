@@ -7,7 +7,8 @@ const Colors = {
     button: {
       primary: "#82b446cc",
       secondary: "#b44682cc",
-      negative: "#dc143c"
+      negative: "#dc143c",
+      neutral: "#9999aa"
     },
     text: {
       primary: "#ffffff"

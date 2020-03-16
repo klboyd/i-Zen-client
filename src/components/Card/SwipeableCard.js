@@ -18,7 +18,7 @@ const SwipeableCard = props => {
         title={"Delete"}>
         <Animated.Text
           style={[
-            styles.actionContent,
+            styles.leftActionContent,
             {
               transform: [{ translateX: trans }]
             }
@@ -28,11 +28,35 @@ const SwipeableCard = props => {
       </TouchableOpacity>
     );
   };
+  const renderRightActions = (progress, dragX) => {
+    const trans = dragX.interpolate({
+      inputRange: [-101, -100, -50, 0],
+      outputRange: [1, 0, 0, 20]
+    });
+    return (
+      <TouchableOpacity
+        style={styles.RightAction}
+        onPress={props.onRightButtonPress}
+        title={"Delete"}>
+        <Animated.Text
+          style={[
+            styles.rightActionContent,
+            {
+              transform: [{ translateX: trans }]
+            }
+          ]}>
+          <Ionicons name="md-create" size={32} color="white" />
+        </Animated.Text>
+      </TouchableOpacity>
+    );
+  };
   return (
     <Swipeable
       overshootLeft={false}
+      overshootRight={false}
       style={styles.card}
-      renderLeftActions={renderLeftActions}>
+      renderLeftActions={renderLeftActions}
+      renderRightActions={renderRightActions}>
       {props.children}
     </Swipeable>
   );
@@ -40,13 +64,23 @@ const SwipeableCard = props => {
 
 const styles = StyleSheet.create({
   card: { marginLeft: 0 },
-  actionContent: {
+  leftActionContent: {
     height: "100%",
     width: "100%",
     paddingHorizontal: 20,
     paddingVertical: 5,
     borderWidth: 0.5,
     backgroundColor: Colors.light.button.negative,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  rightActionContent: {
+    height: "100%",
+    width: "100%",
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    borderWidth: 0.5,
+    backgroundColor: Colors.light.button.neutral,
     justifyContent: "center",
     alignItems: "center"
   },
