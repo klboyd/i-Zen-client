@@ -6,7 +6,7 @@ import ZenButton from "../ButtonComponent/ZenButton";
 const AddButton = props => {
   return (
     <ZenButton
-      customStyle={{ backgroundColor: Colors.light.background.primary }}
+      customStyle={{ backgroundColor: Colors.light.button.primary }}
       {...props}>
       <Text style={styles.buttonText}>Add</Text>
     </ZenButton>

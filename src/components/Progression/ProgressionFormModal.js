@@ -48,12 +48,12 @@ const ProgressionFormModal = props => {
       </View>
       <View style={styles.buttonContainer}>
         <ZenButton
-          customStyle={{ backgroundColor: Colors.light.background.secondary }}
+          customStyle={{ backgroundColor: Colors.light.button.secondary }}
           onPress={cancelFormHandler}>
           <Text>Cancel</Text>
         </ZenButton>
         <ZenButton
-          customStyle={{ backgroundColor: Colors.light.background.primary }}
+          customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={confirmFormHandler}>
           <Text>Add</Text>
         </ZenButton>

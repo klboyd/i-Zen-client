@@ -17,7 +17,6 @@ const ZenButton = ({ customStyle, ...props }) => {
 
 const styles = StyleSheet.create({
   zenButton: {
-    height: 30,
     paddingHorizontal: 8,
     // flex: 1,
     height: 45,

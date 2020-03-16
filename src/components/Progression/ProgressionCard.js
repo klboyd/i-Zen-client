@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 import SwipeableCard from "../Card/SwipeableCard";
 import { removeItem } from "../../modules/APIManager";
+import Colors from "../../modules/Colors";
 
 const ProgressionCard = props => {
   const removeProgessionCard = async () => {
@@ -45,7 +46,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 0.5,
-    paddingVertical: 5
+    paddingVertical: 5,
+    backgroundColor: Colors.light.background.content
   },
   cardText: {
     fontSize: 20
