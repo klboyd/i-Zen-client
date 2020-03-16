@@ -6,7 +6,7 @@ import ZenButton from "../ButtonComponent/ZenButton";
 const HeaderButton = props => {
   return (
     <ZenButton
-      customStyle={{ backgroundColor: Colors.light.background.secondary }}
+      customStyle={{ backgroundColor: Colors.light.button.secondary }}
       {...props}>
       <Text style={styles.buttonText}>Logout</Text>
     </ZenButton>

@@ -16,7 +16,6 @@ const ProgressionScreen = props => {
     return await getAll("progressions");
   };
   const addProgressionHandler = () => setIsFormVisible(true);
-  const hideFormModal = () => setIsFormVisible(false);
 
   const loadProgressions = async () => {
     const progressions = await getProgressionsHandler();
@@ -37,6 +36,7 @@ const ProgressionScreen = props => {
         data={progressions}
         renderItem={progression => (
           <ProgressionCard
+            cardIndex={progression.item.id}
             loadProgressions={loadProgressions}
             progression={progression.item}
           />
@@ -44,14 +44,14 @@ const ProgressionScreen = props => {
       />
       <FooterComponent>
         <ZenButton
-          customStyle={{ backgroundColor: Colors.light.background.primary }}
+          customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={addProgressionHandler}>
           <Text style={styles.addButtonText}>Add</Text>
         </ZenButton>
       </FooterComponent>
       <ProgressionFormModal
-        onConfirm={hideFormModal}
-        onCancel={hideFormModal}
+        onConfirm={() => setIsFormVisible(false)}
+        onCancel={() => setIsFormVisible(false)}
         isFormVisible={isFormVisible}
       />
     </ScreenContainer>

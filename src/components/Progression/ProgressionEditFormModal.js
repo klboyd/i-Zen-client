@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import FormModalContainer from "../Modal/FormModalContainer";
 import ZenButton from "../ButtonComponent/ZenButton";
 import Colors from "../../modules/Colors";
 import InputFieldContainer from "../Input/InputFieldContainer";
-import { postItem } from "../../modules/APIManager";
+import { putItem, getOne } from "../../modules/APIManager";
 
-const ProgressionFormModal = props => {
+const ProgressionEditFormModal = props => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
+  const [createdById, setCreatedById] = useState("");
 
   const cancelFormHandler = () => {
     setName("");
@@ -17,17 +19,39 @@ const ProgressionFormModal = props => {
   };
 
   const confirmFormHandler = async () => {
-    await postItem("progressions", { name: name, description: description });
+    await putItem("progressions", props.cardIndex, {
+      name: name,
+      description: description,
+      created_at: createdAt,
+      created_by_id: createdById
+    });
     setName("");
     setDescription("");
+    setCreatedAt("");
+    setCreatedById("");
     props.onConfirm();
   };
+
+  const getProgressionDetails = async () => {
+    const details = await getOne("progressions", props.cardIndex);
+    console.log(details);
+    setName(details.name);
+    setDescription(details.description);
+  };
+
+  useEffect(() => {
+    if (props.isEditFormVisible === true) {
+      getProgressionDetails();
+    }
+  }, [props.isEditFormVisible]);
 
   return (
     <FormModalContainer
       style={{ ...styles.form, ...props.style }}
-      isFormVisible={props.isFormVisible}>
-      <Text style={styles.formModalHeader}>Add New Progression</Text>
+      isFormVisible={props.isEditFormVisible}>
+      <Text style={styles.formModalHeader}>
+        {`Edit Progression ${props.cardIndex}`}
+      </Text>
       <View style={styles.formContainer}>
         <Text>What do you want to track?</Text>
         <InputFieldContainer
@@ -87,4 +111,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProgressionFormModal;
+export default ProgressionEditFormModal;

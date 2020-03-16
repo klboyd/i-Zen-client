@@ -3,6 +3,8 @@ import { StyleSheet, AsyncStorage, Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import { Ionicons } from "@expo/vector-icons";
+
 import HeaderButton from "./src/components/Header/HeaderButton";
 import AddButton from "./src/components/Header/AddButton";
 
@@ -69,6 +71,14 @@ export default function App() {
               headerTitleAlign: "center",
               headerLeft: () => (
                 <HeaderButton title="Logout" onPress={logoutHandler} />
+              ),
+              headerRight: () => (
+                <Ionicons
+                  style={{ paddingHorizontal: 20 }}
+                  name="md-person"
+                  size={32}
+                  color="black"
+                />
               )
             }}>
             {props => <ProgressionScreen {...props} />}
