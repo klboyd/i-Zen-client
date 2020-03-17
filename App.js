@@ -13,6 +13,7 @@ import { logout } from "./src/modules/APIManager";
 import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import ProgressionScreen from "./src/screens/ProgressionScreen";
+import RetroScreen from "./src/screens/RetroScreen";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -63,25 +64,46 @@ export default function App() {
             </Stack.Screen>
           </>
         ) : (
-          <Stack.Screen
-            name="iZen"
-            options={{
-              headerStyle: styles.headerStyle,
-              headerTitleAlign: "center",
-              headerLeft: () => (
-                <HeaderButton title="Logout" onPress={logoutHandler} />
-              ),
-              headerRight: () => (
-                <Ionicons
-                  style={{ paddingHorizontal: 20 }}
-                  name="md-person"
-                  size={32}
-                  color="black"
-                />
-              )
-            }}>
-            {props => <ProgressionScreen {...props} />}
-          </Stack.Screen>
+          <>
+            <Stack.Screen
+              name="iZen"
+              options={{
+                headerStyle: styles.headerStyle,
+                headerTitleAlign: "center",
+                headerLeft: () => (
+                  <HeaderButton title="Logout" onPress={logoutHandler} />
+                ),
+                headerRight: () => (
+                  <Ionicons
+                    style={{ paddingHorizontal: 20 }}
+                    name="md-person"
+                    size={32}
+                    color="black"
+                  />
+                )
+              }}>
+              {props => <ProgressionScreen {...props} />}
+            </Stack.Screen>
+            <Stack.Screen
+              name="Retro"
+              options={{
+                headerStyle: styles.headerStyle,
+                headerTitleAlign: "center"
+                // headerLeft: () => (
+                //   <HeaderButton title="Logout" onPress={logoutHandler} />
+                // ),
+                // headerRight: () => (
+                //   <Ionicons
+                //     style={{ paddingHorizontal: 20 }}
+                //     name="md-person"
+                //     size={32}
+                //     color="black"
+                //   />
+                // )
+              }}>
+              {props => <RetroScreen {...props} />}
+            </Stack.Screen>
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
