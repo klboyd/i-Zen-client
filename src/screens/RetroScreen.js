@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList, Text } from "react-native";
 
 import FooterComponent from "../components/Footer/FooterComponent";
+import RetroCard from "../components/Retro/RetroCard";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
 import ZenButton from "../components/ButtonComponent/ZenButton";
 
@@ -33,12 +34,11 @@ const RetroScreen = props => {
         style={{ width: "100%" }}
         data={retros}
         renderItem={retro => (
-          <Text>{retro.item.name}</Text>
-          // <RetroCard
-          //   cardIndex={retro.item.id}
-          //   loadRetros={loadRetros}
-          //   retro={retro.item}
-          // />
+          <RetroCard
+            cardIndex={retro.item.id}
+            loadRetros={loadRetros}
+            retro={retro.item}
+          />
         )}
       />
       <FooterComponent>

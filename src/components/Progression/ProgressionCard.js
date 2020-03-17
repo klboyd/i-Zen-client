@@ -23,7 +23,7 @@ const ProgressionCard = props => {
     props.loadProgressions();
   };
 
-  const onLeftButtonPress = async () => {
+  const onLeftSwipe = async () => {
     Alert.alert(
       "Delete this Progression?",
       "It'll be gone for good!",
@@ -41,7 +41,7 @@ const ProgressionCard = props => {
       { cancelable: false }
     );
   };
-  const onRightButtonPress = async () => {
+  const onRightSwipe = async () => {
     setIsEditFormVisible(true);
   };
   const onPress = () => {
@@ -53,20 +53,22 @@ const ProgressionCard = props => {
     <SwipeableCard
       handlePress={onPress}
       cardIndex={props.cardIndex}
-      onLeftButtonPress={onLeftButtonPress}
-      onRightButtonPress={onRightButtonPress}>
-      <View style={{ ...styles.card, ...props.style }}>
-        <Text style={styles.cardText}>{props.progression.name}</Text>
-        <Text style={styles.cardDescription}>
-          {props.progression.description}
-        </Text>
+      onLeftSwipe={onLeftSwipe}
+      onRightSwipe={onRightSwipe}>
+      <View>
+        <View style={{ ...styles.card, ...props.style }}>
+          <Text style={styles.cardText}>{props.progression.name}</Text>
+          <Text style={styles.cardDescription}>
+            {props.progression.description}
+          </Text>
+        </View>
+        <ProgressionEditFormModal
+          onConfirm={onEditConfirm}
+          onCancel={() => setIsEditFormVisible(false)}
+          isEditFormVisible={isEditFormVisible}
+          cardIndex={props.cardIndex}
+        />
       </View>
-      <ProgressionEditFormModal
-        onConfirm={onEditConfirm}
-        onCancel={() => setIsEditFormVisible(false)}
-        isEditFormVisible={isEditFormVisible}
-        cardIndex={props.cardIndex}
-      />
     </SwipeableCard>
   );
 };
