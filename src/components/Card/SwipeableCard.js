@@ -1,7 +1,7 @@
 // swipeable card template for consistent styling
 
 import React from "react";
-import { StyleSheet, Animated } from "react-native";
+import { StyleSheet, Animated, Alert } from "react-native";
 
 import { Swipeable, TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
@@ -61,7 +61,9 @@ const SwipeableCard = props => {
       style={styles.card}
       renderLeftActions={renderLeftActions}
       renderRightActions={renderRightActions}>
-      {props.children}
+      <TouchableOpacity activeOpacity={0.5} onPress={props.handlePress}>
+        {props.children}
+      </TouchableOpacity>
     </Swipeable>
   );
 };

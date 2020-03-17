@@ -44,9 +44,13 @@ const ProgressionCard = props => {
   const onRightButtonPress = async () => {
     setIsEditFormVisible(true);
   };
+  const onPress = () => {
+    Alert.alert(`pressed ${props.cardIndex}`);
+  };
   return (
     <SwipeableCard
-      cardIndex={props.index}
+      handlePress={onPress}
+      cardIndex={props.cardIndex}
       onLeftButtonPress={onLeftButtonPress}
       onRightButtonPress={onRightButtonPress}>
       <View style={{ ...styles.card, ...props.style }}>
