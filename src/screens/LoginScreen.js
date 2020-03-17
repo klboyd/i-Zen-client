@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import Colors from "../modules/Colors";
-import { login } from "../modules/APIManager";
+
 import InputFieldContainer from "../components/Input/InputFieldContainer";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
 import ZenButton from "../components/ButtonComponent/ZenButton";
+
+import Colors from "../modules/Colors";
+import { login } from "../modules/APIManager";
 
 const LoginScreen = props => {
   const [username, setUsername] = useState("");

@@ -1,9 +1,13 @@
+// form modal for editing a progression
+
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
+
 import FormModalContainer from "../Modal/FormModalContainer";
-import ZenButton from "../ButtonComponent/ZenButton";
-import Colors from "../../modules/Colors";
 import InputFieldContainer from "../Input/InputFieldContainer";
+import ZenButton from "../ButtonComponent/ZenButton";
+
+import Colors from "../../modules/Colors";
 import { putItem, getOne } from "../../modules/APIManager";
 
 const ProgressionEditFormModal = props => {
@@ -34,7 +38,6 @@ const ProgressionEditFormModal = props => {
 
   const getProgressionDetails = async () => {
     const details = await getOne("progressions", props.cardIndex);
-    console.log(details);
     setName(details.name);
     setDescription(details.description);
   };
@@ -49,9 +52,7 @@ const ProgressionEditFormModal = props => {
     <FormModalContainer
       style={{ ...styles.form, ...props.style }}
       isFormVisible={props.isEditFormVisible}>
-      <Text style={styles.formModalHeader}>
-        {`Edit Progression ${props.cardIndex}`}
-      </Text>
+      <Text style={styles.formModalHeader}>Edit Progression</Text>
       <View style={styles.formContainer}>
         <Text>What do you want to track?</Text>
         <InputFieldContainer

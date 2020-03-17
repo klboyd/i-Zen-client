@@ -1,7 +1,9 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
-import Colors from "../../modules/Colors";
+
 import ZenButton from "../ButtonComponent/ZenButton";
+
+import Colors from "../../modules/Colors";
 
 const AddButton = props => {
   return (

@@ -1,9 +1,14 @@
+// functions for token handling, REST calls for API, and login/register/logout
+
 import { Alert, Platform } from "react-native";
 import { AsyncStorage } from "react-native";
-import Constants from "expo-constants";
 import { NET_ADDR } from "react-native-dotenv";
+import Constants from "expo-constants";
 
+// set baseUrl according to the testing device
+// current set up for Android emulator, iOS simulator, and iOS device
 let baseUrl;
+
 if (
   Constants.isDevice &&
   (Platform.OS === "android" || Platform.OS === "ios")
@@ -83,7 +88,7 @@ const putItem = async (resource, id, updatedItem) => {
     });
     return results.json();
   } catch (error) {
-    console.log(error);
+    console.log("PUT ITEM:", error);
   }
 };
 

@@ -1,9 +1,14 @@
+// card for displaying progression details
+// plus edit/delete functionality
+
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
-import SwipeableCard from "../Card/SwipeableCard";
-import { removeItem } from "../../modules/APIManager";
-import Colors from "../../modules/Colors";
+
 import ProgressionEditFormModal from "../Progression/ProgressionEditFormModal";
+import SwipeableCard from "../Card/SwipeableCard";
+
+import Colors from "../../modules/Colors";
+import { removeItem } from "../../modules/APIManager";
 
 const ProgressionCard = props => {
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);

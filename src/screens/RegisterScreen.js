@@ -7,8 +7,10 @@ import {
   Alert,
   AsyncStorage
 } from "react-native";
+
 import InputFieldContainer from "../components/Input/InputFieldContainer";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
+
 import Colors from "../modules/Colors";
 import { register } from "../modules/APIManager";
 

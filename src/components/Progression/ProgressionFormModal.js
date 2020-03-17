@@ -1,9 +1,13 @@
+// form modal for creating a progression
+
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
+
 import FormModalContainer from "../Modal/FormModalContainer";
-import ZenButton from "../ButtonComponent/ZenButton";
-import Colors from "../../modules/Colors";
 import InputFieldContainer from "../Input/InputFieldContainer";
+import ZenButton from "../ButtonComponent/ZenButton";
+
+import Colors from "../../modules/Colors";
 import { postItem } from "../../modules/APIManager";
 
 const ProgressionFormModal = props => {

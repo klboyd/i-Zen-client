@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, AsyncStorage, Text, View, Button } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import { Ionicons } from "@expo/vector-icons";
 
 import HeaderButton from "./src/components/Header/HeaderButton";
-import AddButton from "./src/components/Header/AddButton";
 
-import { logout } from "./src/modules/APIManager";
 import Colors from "./src/modules/Colors";
+import { logout } from "./src/modules/APIManager";
 
 import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";

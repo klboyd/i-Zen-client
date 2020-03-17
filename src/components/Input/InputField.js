@@ -1,3 +1,5 @@
+// input field template for consistent styling
+
 import React from "react";
 import { StyleSheet, TextInput, ShadowPropTypesIOS } from "react-native";
 
