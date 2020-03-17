@@ -45,7 +45,9 @@ const ProgressionCard = props => {
     setIsEditFormVisible(true);
   };
   const onPress = () => {
-    Alert.alert(`pressed ${props.cardIndex}`);
+    props.navigation.navigate("Retro", {
+      progressionId: props.cardIndex
+    });
   };
   return (
     <SwipeableCard

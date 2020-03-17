@@ -38,6 +38,7 @@ const ProgressionScreen = props => {
         data={progressions}
         renderItem={progression => (
           <ProgressionCard
+            navigation={props.navigation}
             cardIndex={progression.item.id}
             loadProgressions={loadProgressions}
             progression={progression.item}
