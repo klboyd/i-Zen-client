@@ -1,18 +1,12 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Button,
-  Alert,
-  AsyncStorage
-} from "react-native";
+import { StyleSheet, View, Text, Alert, AsyncStorage } from "react-native";
 
 import InputFieldContainer from "../components/Input/InputFieldContainer";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
 
 import Colors from "../modules/Colors";
 import { register } from "../modules/APIManager";
+import ZenButton from "../components/ButtonComponent/ZenButton";
 
 const RegisterScreen = props => {
   const [username, setUsername] = useState("");
@@ -22,18 +16,24 @@ const RegisterScreen = props => {
   const [lastname, setLastname] = useState("");
 
   const registerNewUserHandler = async () => {
-    if (password === verifyPassword) {
-      const response = await register({
-        username: username,
-        password: password,
-        first_name: firstname,
-        last_name: lastname
-      });
-      if (await AsyncStorage.getItem("iZen-token")) {
-        await props.setIsAuthenticated(true);
-      }
+    if (username === "") {
+      Alert.alert("Please enter a username");
+    } else if (password === "") {
+      Alert.alert("Please enter a password");
     } else {
-      Alert.alert("Passwords do not match.");
+      if (password === verifyPassword) {
+        const response = await register({
+          username: username,
+          password: password,
+          first_name: firstname,
+          last_name: lastname
+        });
+        if (await AsyncStorage.getItem("iZen-token")) {
+          await props.setIsAuthenticated(true);
+        }
+      } else {
+        Alert.alert("Passwords do not match.");
+      }
     }
   };
 
@@ -71,12 +71,13 @@ const RegisterScreen = props => {
         onChangeText={text => setLastname(text)}
       />
       <View style={styles.buttonContainer}>
-        <Button
-          style={styles.button}
+        <ZenButton
+          customStyle={styles.button}
           color={Colors.light.button.secondary}
           onPress={registerNewUserHandler}
-          title="Register"
-        />
+          title="Register">
+          <Text>Register</Text>
+        </ZenButton>
       </View>
     </ScreenContainer>
   );
@@ -98,6 +99,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 20
+  },
+  button: {
+    backgroundColor: Colors.light.button.primary
   }
 });
 

@@ -78,15 +78,15 @@ const putItem = async (resource, id, updatedItem) => {
   const token = await getToken();
 
   try {
-    const results = await fetch(`${baseUrl}/${resource}/${id}`, {
+    await fetch(`${baseUrl}/${resource}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: token
       },
       body: JSON.stringify(updatedItem)
     });
-    return results.json();
   } catch (error) {
     console.log("PUT ITEM:", error);
   }

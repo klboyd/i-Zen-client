@@ -1,7 +1,7 @@
 // form modal for editing a progression
 
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Alert } from "react-native";
 
 import FormModalContainer from "../Modal/FormModalContainer";
 import InputFieldContainer from "../Input/InputFieldContainer";
@@ -23,17 +23,23 @@ const ProgressionEditFormModal = props => {
   };
 
   const confirmFormHandler = async () => {
-    await putItem("progressions", props.cardIndex, {
-      name: name,
-      description: description,
-      created_at: createdAt,
-      created_by_id: createdById
-    });
-    setName("");
-    setDescription("");
-    setCreatedAt("");
-    setCreatedById("");
-    props.onConfirm();
+    if (name === "") {
+      Alert.alert("Name cannot be blank");
+    } else if (description === "") {
+      Alert.alert("Description cannot be blank");
+    } else {
+      await putItem("progressions", props.cardIndex, {
+        name: name,
+        description: description,
+        created_at: createdAt,
+        created_by_id: createdById
+      });
+      setName("");
+      setDescription("");
+      setCreatedAt("");
+      setCreatedById("");
+      props.onConfirm();
+    }
   };
 
   const getProgressionDetails = async () => {
@@ -54,15 +60,16 @@ const ProgressionEditFormModal = props => {
       isFormVisible={props.isEditFormVisible}>
       <Text style={styles.formModalHeader}>Edit Progression</Text>
       <View style={styles.formContainer}>
-        <Text>What do you want to track?</Text>
+        <Text>Name</Text>
         <InputFieldContainer
           inputStyle={styles.inputField}
           placeholder="ex: Cooking More Meals"
           value={name}
+          required={true}
           // autoCapitalize="none"
           onChangeText={setName}
         />
-        <Text>Why do you want to improve this?</Text>
+        <Text>Description</Text>
         <InputFieldContainer
           inputStyle={styles.inputField}
           placeholder="ex: To stop eating so much fast food"
@@ -80,7 +87,7 @@ const ProgressionEditFormModal = props => {
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={confirmFormHandler}>
-          <Text>Add</Text>
+          <Text>Save</Text>
         </ZenButton>
       </View>
     </FormModalContainer>

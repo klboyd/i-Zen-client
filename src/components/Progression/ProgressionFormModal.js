@@ -1,7 +1,7 @@
 // form modal for creating a progression
 
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Alert } from "react-native";
 
 import FormModalContainer from "../Modal/FormModalContainer";
 import InputFieldContainer from "../Input/InputFieldContainer";
@@ -21,10 +21,14 @@ const ProgressionFormModal = props => {
   };
 
   const confirmFormHandler = async () => {
-    await postItem("progressions", { name: name, description: description });
-    setName("");
-    setDescription("");
-    props.onConfirm();
+    if (name === "" || description === "") {
+      Alert.alert("Fields cannot be blank");
+    } else {
+      await postItem("progressions", { name: name, description: description });
+      setName("");
+      setDescription("");
+      props.onConfirm();
+    }
   };
 
   return (
