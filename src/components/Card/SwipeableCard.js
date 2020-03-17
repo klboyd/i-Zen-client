@@ -1,8 +1,11 @@
+// swipeable card template for consistent styling
+
 import React from "react";
 import { StyleSheet, Animated } from "react-native";
-import Swipeable from "react-native-gesture-handler/Swipeable";
-import { TouchableOpacity } from "react-native-gesture-handler";
+
+import { Swipeable, TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+
 import Colors from "../../modules/Colors";
 
 const SwipeableCard = props => {
@@ -37,7 +40,7 @@ const SwipeableCard = props => {
       <TouchableOpacity
         style={styles.rightAction}
         onPress={props.onRightButtonPress}
-        title={"Delete"}>
+        title={"Edit"}>
         <Animated.Text
           style={[
             styles.rightActionContent,

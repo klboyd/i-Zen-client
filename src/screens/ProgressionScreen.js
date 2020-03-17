@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList, Text, Alert } from "react-native";
-import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
-import { getAll } from "../modules/APIManager";
-import ProgressionCard from "../components/Progression/ProgressionCard";
+
 import FooterComponent from "../components/Footer/FooterComponent";
-import ZenButton from "../components/ButtonComponent/ZenButton";
-import Colors from "../modules/Colors";
+import ProgressionCard from "../components/Progression/ProgressionCard";
 import ProgressionFormModal from "../components/Progression/ProgressionFormModal";
+import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
+import ZenButton from "../components/ButtonComponent/ZenButton";
+
+import Colors from "../modules/Colors";
+import { getAll } from "../modules/APIManager";
 
 const ProgressionScreen = props => {
   const [progressions, setProgressions] = useState([]);

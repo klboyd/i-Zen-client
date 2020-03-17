@@ -1,5 +1,8 @@
+// generic button template for consistent styling
+
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
+
 import Colors from "../../modules/Colors";
 
 const ZenButton = ({ customStyle, ...props }) => {

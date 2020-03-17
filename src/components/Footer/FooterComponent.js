@@ -1,5 +1,8 @@
+// footer template for consistent styling
+
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+
 import Colors from "../../modules/Colors";
 
 const FooterComponent = props => {

@@ -1,3 +1,5 @@
+// consistent theming for app
+
 const Colors = {
   light: {
     background: {
