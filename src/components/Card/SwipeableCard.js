@@ -30,23 +30,25 @@ const SwipeableCard = props => {
     );
   };
   const renderRightActions = (progress, dragX) => {
-    const trans = dragX.interpolate({
-      inputRange: [-101, -100, -50, 0],
-      outputRange: [1, 0, 0, 20]
-    });
-    return (
-      <View style={styles.rightAction}>
-        <Animated.Text
-          style={[
-            styles.rightActionContent,
-            {
-              transform: [{ translateX: trans }]
-            }
-          ]}>
-          <Ionicons name="md-create" size={32} color="white" />
-        </Animated.Text>
-      </View>
-    );
+    if (props.onRightSwipe) {
+      const trans = dragX.interpolate({
+        inputRange: [-101, -100, -50, 0],
+        outputRange: [1, 0, 0, 20]
+      });
+      return (
+        <View style={styles.rightAction}>
+          <Animated.Text
+            style={[
+              styles.rightActionContent,
+              {
+                transform: [{ translateX: trans }]
+              }
+            ]}>
+            <Ionicons name="md-create" size={32} color="white" />
+          </Animated.Text>
+        </View>
+      );
+    }
   };
 
   return (
@@ -63,7 +65,7 @@ const SwipeableCard = props => {
       overshootLeft={false}
       overshootRight={false}
       onSwipeableLeftOpen={props.onLeftSwipe}
-      onSwipeableRightOpen={props.onRightSwipe}
+      onSwipeableRightOpen={props.onRightSwipe || null}
       renderLeftActions={renderLeftActions}
       renderRightActions={renderRightActions}>
       <TouchableHighlight
