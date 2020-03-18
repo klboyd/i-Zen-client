@@ -7,7 +7,7 @@ import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
 import ZenButton from "../components/ButtonComponent/ZenButton";
 
 import Colors from "../modules/Colors";
-import { getAll } from "../modules/APIManager";
+import { getAll, postItem } from "../modules/APIManager";
 
 const RetroScreen = props => {
   const [retros, setRetros] = useState([]);
@@ -21,6 +21,33 @@ const RetroScreen = props => {
   const loadRetros = async () => {
     const retros = await getRetrosHandler();
     setRetros(retros);
+  };
+
+  const createRetro = async () => {
+    const response = await postItem("retros", {
+      progression_id: props.route.params.progressionId
+    });
+
+    response.responseMessage && Alert.alert("That retro already exists!");
+    await loadRetros();
+  };
+
+  const addRetroHandler = () => {
+    Alert.alert(
+      "Start Retro",
+      "Create a new retro with today's date?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Create",
+          onPress: createRetro
+        }
+      ],
+      { cancelable: false }
+    );
   };
 
   useEffect(() => {
@@ -69,7 +96,7 @@ const RetroScreen = props => {
         </ZenButton>
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.primary }}
-          onPress={() => Alert.alert("pressed this button")}>
+          onPress={addRetroHandler}>
           <Text style={styles.addButtonText}>Add</Text>
         </ZenButton>
       </FooterComponent>
