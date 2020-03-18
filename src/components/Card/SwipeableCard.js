@@ -3,11 +3,7 @@
 import React from "react";
 import { StyleSheet, Animated, Alert, View } from "react-native";
 
-import {
-  Swipeable,
-  TouchableOpacity,
-  TouchableHighlight
-} from "react-native-gesture-handler";
+import { Swipeable, TouchableHighlight } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 
 import Colors from "../../modules/Colors";
@@ -55,6 +51,10 @@ const SwipeableCard = props => {
 
   return (
     <Swipeable
+      ref={ref => (props.row[props.cardIndex] = ref)}
+      onSwipeableOpen={() => {
+        return props.closeRow(props.cardIndex);
+      }}
       friction={3}
       overshootFriction={8}
       style={styles.card}

@@ -35,7 +35,7 @@ const RetroScreen = props => {
         data={retros}
         renderItem={retro => (
           <RetroCard
-            cardIndex={retro.item.id}
+            cardId={retro.item.id}
             loadRetros={loadRetros}
             retro={retro.item}
           />

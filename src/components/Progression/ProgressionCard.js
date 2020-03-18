@@ -24,6 +24,7 @@ const ProgressionCard = props => {
   };
 
   const onLeftSwipe = async () => {
+    props.closeSelf(props.cardIndex);
     Alert.alert(
       "Delete this Progression?",
       "It'll be gone for good!",
@@ -42,17 +43,18 @@ const ProgressionCard = props => {
     );
   };
   const onRightSwipe = async () => {
+    props.closeSelf(props.cardIndex);
     setIsEditFormVisible(true);
   };
   const onPress = () => {
     props.navigation.navigate("Retro", {
-      progressionId: props.cardIndex
+      progressionId: props.cardId
     });
   };
   return (
     <SwipeableCard
+      {...props}
       handlePress={onPress}
-      cardIndex={props.cardIndex}
       onLeftSwipe={onLeftSwipe}
       onRightSwipe={onRightSwipe}>
       <View>
@@ -66,7 +68,7 @@ const ProgressionCard = props => {
           onConfirm={onEditConfirm}
           onCancel={() => setIsEditFormVisible(false)}
           isEditFormVisible={isEditFormVisible}
-          cardIndex={props.cardIndex}
+          cardId={props.cardId}
         />
       </View>
     </SwipeableCard>

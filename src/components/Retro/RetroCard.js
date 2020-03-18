@@ -45,15 +45,15 @@ const RetroCard = props => {
     setIsEditFormVisible(true);
   };
   const onPress = () => {
-    Alert.alert(`Pressed #${props.cardIndex}`);
+    Alert.alert(`Pressed #${props.cardId}`);
     // props.navigation.navigate("Retro", {
-    //   retroId: props.cardIndex
+    //   retroId: props.cardId
     // });
   };
   return (
     <SwipeableCard
       handlePress={onPress}
-      cardIndex={props.cardIndex}
+      cardId={props.cardId}
       onLeftButtonPress={onLeftButtonPress}
       onRightButtonPress={onRightButtonPress}>
       <View style={{ ...styles.card, ...props.style }}>
@@ -64,7 +64,7 @@ const RetroCard = props => {
         onConfirm={onEditConfirm}
         onCancel={() => setIsEditFormVisible(false)}
         isEditFormVisible={isEditFormVisible}
-        cardIndex={props.cardIndex}
+        cardId={props.cardId}
       /> */}
     </SwipeableCard>
   );
