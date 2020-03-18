@@ -30,6 +30,17 @@ const ProgressionScreen = props => {
     }
   }, [isFormVisible]);
 
+  let row = [];
+  let prevOpenedRow;
+  const closeSelf = index => {
+    row[index].close();
+  };
+  const closeRow = index => {
+    if (prevOpenedRow && prevOpenedRow !== row[index]) {
+      prevOpenedRow.close();
+    }
+    prevOpenedRow = row[index];
+  };
   return (
     <ScreenContainer style={{ ...styles.screen, ...props.style }}>
       <FlatList
@@ -38,8 +49,13 @@ const ProgressionScreen = props => {
         data={progressions}
         renderItem={progression => (
           <ProgressionCard
+            row={row}
+            prevOpenedRow={prevOpenedRow}
+            closeRow={closeRow}
+            closeSelf={closeSelf}
             navigation={props.navigation}
-            cardIndex={progression.item.id}
+            cardIndex={progression.index}
+            cardId={progression.item.id}
             loadProgressions={loadProgressions}
             progression={progression.item}
           />

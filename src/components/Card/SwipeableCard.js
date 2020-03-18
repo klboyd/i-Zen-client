@@ -1,9 +1,9 @@
 // swipeable card template for consistent styling
 
 import React from "react";
-import { StyleSheet, Animated, Alert } from "react-native";
+import { StyleSheet, Animated, Alert, View } from "react-native";
 
-import { Swipeable, TouchableOpacity } from "react-native-gesture-handler";
+import { Swipeable, TouchableHighlight } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 
 import Colors from "../../modules/Colors";
@@ -12,13 +12,11 @@ const SwipeableCard = props => {
   const renderLeftActions = (progress, dragX) => {
     const trans = dragX.interpolate({
       inputRange: [0, 50, 100, 101],
-      outputRange: [-20, 0, 0, 1]
+      outputRange: [-20, 0, 0, 1],
+      extrapolate: "clamp"
     });
     return (
-      <TouchableOpacity
-        style={styles.leftAction}
-        onPress={props.onLeftButtonPress}
-        title={"Delete"}>
+      <View style={styles.leftAction}>
         <Animated.Text
           style={[
             styles.leftActionContent,
@@ -28,7 +26,7 @@ const SwipeableCard = props => {
           ]}>
           <Ionicons name="md-trash" size={32} color="white" />
         </Animated.Text>
-      </TouchableOpacity>
+      </View>
     );
   };
   const renderRightActions = (progress, dragX) => {
@@ -37,10 +35,7 @@ const SwipeableCard = props => {
       outputRange: [1, 0, 0, 20]
     });
     return (
-      <TouchableOpacity
-        style={styles.rightAction}
-        onPress={props.onRightButtonPress}
-        title={"Edit"}>
+      <View style={styles.rightAction}>
         <Animated.Text
           style={[
             styles.rightActionContent,
@@ -50,20 +45,32 @@ const SwipeableCard = props => {
           ]}>
           <Ionicons name="md-create" size={32} color="white" />
         </Animated.Text>
-      </TouchableOpacity>
+      </View>
     );
   };
 
   return (
     <Swipeable
+      ref={ref => (props.row[props.cardIndex] = ref)}
+      onSwipeableOpen={() => {
+        return props.closeRow(props.cardIndex);
+      }}
+      friction={3}
+      overshootFriction={8}
+      style={styles.card}
+      leftThreshold={20}
+      rightThreshold={20}
       overshootLeft={false}
       overshootRight={false}
-      style={styles.card}
+      onSwipeableLeftOpen={props.onLeftSwipe}
+      onSwipeableRightOpen={props.onRightSwipe}
       renderLeftActions={renderLeftActions}
       renderRightActions={renderRightActions}>
-      <TouchableOpacity activeOpacity={0.5} onPress={props.handlePress}>
+      <TouchableHighlight
+        underlayColor={Colors.light.background.header}
+        onPress={props.handlePress}>
         {props.children}
-      </TouchableOpacity>
+      </TouchableHighlight>
     </Swipeable>
   );
 };

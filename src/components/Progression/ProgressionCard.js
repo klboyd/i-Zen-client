@@ -23,7 +23,8 @@ const ProgressionCard = props => {
     props.loadProgressions();
   };
 
-  const onLeftButtonPress = async () => {
+  const onLeftSwipe = async () => {
+    props.closeSelf(props.cardIndex);
     Alert.alert(
       "Delete this Progression?",
       "It'll be gone for good!",
@@ -41,32 +42,35 @@ const ProgressionCard = props => {
       { cancelable: false }
     );
   };
-  const onRightButtonPress = async () => {
+  const onRightSwipe = async () => {
+    props.closeSelf(props.cardIndex);
     setIsEditFormVisible(true);
   };
   const onPress = () => {
     props.navigation.navigate("Retro", {
-      progressionId: props.cardIndex
+      progressionId: props.cardId
     });
   };
   return (
     <SwipeableCard
+      {...props}
       handlePress={onPress}
-      cardIndex={props.cardIndex}
-      onLeftButtonPress={onLeftButtonPress}
-      onRightButtonPress={onRightButtonPress}>
-      <View style={{ ...styles.card, ...props.style }}>
-        <Text style={styles.cardText}>{props.progression.name}</Text>
-        <Text style={styles.cardDescription}>
-          {props.progression.description}
-        </Text>
+      onLeftSwipe={onLeftSwipe}
+      onRightSwipe={onRightSwipe}>
+      <View>
+        <View style={{ ...styles.card, ...props.style }}>
+          <Text style={styles.cardText}>{props.progression.name}</Text>
+          <Text style={styles.cardDescription}>
+            {props.progression.description}
+          </Text>
+        </View>
+        <ProgressionEditFormModal
+          onConfirm={onEditConfirm}
+          onCancel={() => setIsEditFormVisible(false)}
+          isEditFormVisible={isEditFormVisible}
+          cardId={props.cardId}
+        />
       </View>
-      <ProgressionEditFormModal
-        onConfirm={onEditConfirm}
-        onCancel={() => setIsEditFormVisible(false)}
-        isEditFormVisible={isEditFormVisible}
-        cardIndex={props.cardIndex}
-      />
     </SwipeableCard>
   );
 };

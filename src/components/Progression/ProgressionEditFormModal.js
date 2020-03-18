@@ -28,7 +28,7 @@ const ProgressionEditFormModal = props => {
     } else if (description === "") {
       Alert.alert("Description cannot be blank");
     } else {
-      await putItem("progressions", props.cardIndex, {
+      await putItem("progressions", props.cardId, {
         name: name,
         description: description,
         created_at: createdAt,
@@ -43,7 +43,7 @@ const ProgressionEditFormModal = props => {
   };
 
   const getProgressionDetails = async () => {
-    const details = await getOne("progressions", props.cardIndex);
+    const details = await getOne("progressions", props.cardId);
     setName(details.name);
     setDescription(details.description);
   };
