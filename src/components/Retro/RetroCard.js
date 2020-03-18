@@ -27,17 +27,16 @@ const RetroCard = props => {
         {
           text: "Delete",
           style: "destructive",
-          onPress: () => removeRetroCard()
+          onPress: removeRetroCard
         }
       ],
       { cancelable: false }
     );
   };
   const onPress = () => {
-    Alert.alert(`Pressed #${props.cardId}`);
-    // props.navigation.navigate("Retro", {
-    //   retroId: props.cardId
-    // });
+    props.navigation.navigate("Notes", {
+      retroId: props.cardId
+    });
   };
   return (
     <SwipeableCard {...props} handlePress={onPress} onLeftSwipe={onLeftSwipe}>

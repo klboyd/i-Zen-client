@@ -80,6 +80,7 @@ const RetroScreen = props => {
             closeSelf={closeSelf}
             cardIndex={retro.index}
             cardId={retro.item.id}
+            navigation={props.navigation}
             loadRetros={loadRetros}
             retro={retro.item}
           />

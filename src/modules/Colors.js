@@ -14,6 +14,10 @@ const Colors = {
     },
     text: {
       primary: "#ffffff"
+    },
+    noteCard: {
+      positive: "#82b44655",
+      negative: "#dc143c55"
     }
   }
 };

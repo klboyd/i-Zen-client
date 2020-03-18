@@ -11,6 +11,7 @@ import Colors from "./src/modules/Colors";
 import { logout } from "./src/modules/APIManager";
 
 import LoginScreen from "./src/screens/LoginScreen";
+import NoteScreen from "./src/screens/NoteScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import ProgressionScreen from "./src/screens/ProgressionScreen";
 import RetroScreen from "./src/screens/RetroScreen";
@@ -89,19 +90,16 @@ export default function App() {
               options={{
                 headerStyle: styles.headerStyle,
                 headerTitleAlign: "center"
-                // headerLeft: () => (
-                //   <HeaderButton title="Logout" onPress={logoutHandler} />
-                // ),
-                // headerRight: () => (
-                //   <Ionicons
-                //     style={{ paddingHorizontal: 20 }}
-                //     name="md-person"
-                //     size={32}
-                //     color="black"
-                //   />
-                // )
               }}>
               {props => <RetroScreen {...props} />}
+            </Stack.Screen>
+            <Stack.Screen
+              name="Notes"
+              options={{
+                headerStyle: styles.headerStyle,
+                headerTitleAlign: "center"
+              }}>
+              {props => <NoteScreen {...props} />}
             </Stack.Screen>
           </>
         )}
