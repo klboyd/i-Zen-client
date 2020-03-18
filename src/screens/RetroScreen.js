@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, FlatList, Text } from "react-native";
+import { StyleSheet, FlatList, Text, Alert } from "react-native";
 
 import FooterComponent from "../components/Footer/FooterComponent";
 import RetroCard from "../components/Retro/RetroCard";
@@ -27,6 +27,18 @@ const RetroScreen = props => {
     loadRetros();
   }, []);
 
+  let row = [];
+  let prevOpenedRow;
+  const closeSelf = index => {
+    row[index].close();
+  };
+  const closeRow = index => {
+    if (prevOpenedRow && prevOpenedRow !== row[index]) {
+      prevOpenedRow.close();
+    }
+    prevOpenedRow = row[index];
+  };
+
   return (
     <ScreenContainer style={{ ...styles.screen, ...props.style }}>
       <FlatList
@@ -35,6 +47,11 @@ const RetroScreen = props => {
         data={retros}
         renderItem={retro => (
           <RetroCard
+            row={row}
+            prevOpenedRow={prevOpenedRow}
+            closeRow={closeRow}
+            closeSelf={closeSelf}
+            cardIndex={retro.index}
             cardId={retro.item.id}
             loadRetros={loadRetros}
             retro={retro.item}
@@ -42,6 +59,14 @@ const RetroScreen = props => {
         )}
       />
       <FooterComponent>
+        <ZenButton
+          customStyle={{
+            width: 150,
+            backgroundColor: Colors.light.button.secondary
+          }}
+          onPress={() => Alert.alert("pressed this button")}>
+          <Text style={styles.addButtonText}>Action Items</Text>
+        </ZenButton>
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={() => Alert.alert("pressed this button")}>

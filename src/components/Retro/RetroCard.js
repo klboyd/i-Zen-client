@@ -52,8 +52,8 @@ const RetroCard = props => {
   };
   return (
     <SwipeableCard
+      {...props}
       handlePress={onPress}
-      cardId={props.cardId}
       onLeftButtonPress={onLeftButtonPress}
       onRightButtonPress={onRightButtonPress}>
       <View style={{ ...styles.card, ...props.style }}>
