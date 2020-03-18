@@ -68,6 +68,9 @@ const postItem = async (resource, newItem) => {
       },
       body: JSON.stringify(newItem)
     });
+    if (results.status === 302) {
+      return { responseMessage: "data already exists" };
+    }
     return results.json();
   } catch (error) {
     console.log(error);
