@@ -78,6 +78,7 @@ const ProgressionCard = props => {
 const styles = StyleSheet.create({
   card: {
     width: "100%",
+    height: 60,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 0.5,
