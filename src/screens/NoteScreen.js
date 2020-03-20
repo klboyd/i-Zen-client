@@ -2,26 +2,39 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList, Text, View, Alert } from "react-native";
 
 import FooterComponent from "../components/Footer/FooterComponent";
-import NoteCard from "../components/Note/NoteCard";
 // import NoteFormModal from "../components/Note/NoteFormModal";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
 import ZenButton from "../components/ButtonComponent/ZenButton";
 
 import Colors from "../modules/Colors";
 import { getAll } from "../modules/APIManager";
+import NoteList from "../components/Note/NoteList";
 
 const NoteScreen = props => {
-  const [notes, setNotes] = useState([]);
+  const [positiveNotes, setPositiveNotes] = useState([]);
+  const [negativeNotes, setNegativeNotes] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const getNotesHandler = async () => {
-    return await getAll(`notes?retro=${props.route.params.retroId}`);
+    let positiveNotes = [];
+    let negativeNotes = [];
+
+    const notes = await getAll(`notes?retro=${props.route.params.retroId}`);
+
+    notes.forEach(note => {
+      if (note.retro_note_board.note_board.board_type === "positive") {
+        positiveNotes.push(note);
+      } else if (note.retro_note_board.note_board.board_type === "negative") {
+        negativeNotes.push(note);
+      }
+    });
+    setPositiveNotes(positiveNotes);
+    setNegativeNotes(negativeNotes);
   };
   const addNoteHandler = () => setIsFormVisible(true);
 
   const loadNotes = async () => {
-    const notes = await getNotesHandler();
-    setNotes(notes);
+    await getNotesHandler();
   };
 
   useEffect(() => {
@@ -43,36 +56,41 @@ const NoteScreen = props => {
   };
   return (
     <ScreenContainer style={{ ...styles.screen, ...props.style }}>
-      <FlatList
-        keyExtractor={(item, index) => `${item.id}`}
-        style={{ width: "100%" }}
-        data={notes}
-        renderItem={note => (
-          <NoteCard
-            style={{
-              backgroundColor:
-                Colors.light.noteCard[
-                  note.item.retro_note_board.note_board.board_type
-                ]
-            }}
-            row={row}
-            prevOpenedRow={prevOpenedRow}
-            closeRow={closeRow}
-            closeSelf={closeSelf}
-            navigation={props.navigation}
-            cardIndex={note.index}
-            cardId={note.item.id}
-            loadNotes={loadNotes}
-            note={note.item}
-          />
-        )}
+      <NoteList
+        title="What went well?"
+        notes={positiveNotes}
+        row={row}
+        prevOpenedRow={prevOpenedRow}
+        closeRow={closeRow}
+        closeSelf={closeSelf}
+        loadNotes={loadNotes}
+        navigation={props.navigation}
+      />
+      <NoteList
+        title="What went to hell?"
+        notes={negativeNotes}
+        row={row}
+        prevOpenedRow={prevOpenedRow}
+        closeRow={closeRow}
+        closeSelf={closeSelf}
+        loadNotes={loadNotes}
+        navigation={props.navigation}
       />
       <FooterComponent>
         <ZenButton
+          customStyle={{
+            width: 150,
+            backgroundColor: Colors.light.button.secondary,
+            flex: 1
+          }}
+          onPress={() => Alert.alert("pressed this button")}>
+          <Text style={styles.addButtonText}>Action Items</Text>
+        </ZenButton>
+        {/* <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={addNoteHandler}>
           <Text style={styles.addButtonText}>Add</Text>
-        </ZenButton>
+        </ZenButton> */}
       </FooterComponent>
       {/* <NoteFormModal
         onConfirm={() => setIsFormVisible(false)}

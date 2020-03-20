@@ -58,8 +58,10 @@ const NoteCard = props => {
       onLeftSwipe={onLeftSwipe}
       onRightSwipe={onRightSwipe}>
       <View>
-        <View style={{ ...styles.card, ...props.style }}>
-          <Text style={styles.cardDescription}>{props.note.description}</Text>
+        <View style={{ backgroundColor: "white" }}>
+          <View style={{ ...styles.card, ...props.style }}>
+            <Text style={styles.cardDescription}>{props.note.description}</Text>
+          </View>
         </View>
         {/* <NoteEditFormModal
           onConfirm={onEditConfirm}
@@ -75,7 +77,7 @@ const NoteCard = props => {
 const styles = StyleSheet.create({
   card: {
     width: "100%",
-    height: 60,
+    minHeight: 60,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 0.5,
@@ -85,7 +87,10 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   cardDescription: {
-    fontSize: 14
+    margin: 8,
+    fontSize: 20,
+    // color: "white",
+    textAlign: "center"
   }
 });
 

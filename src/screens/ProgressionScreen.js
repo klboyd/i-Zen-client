@@ -63,7 +63,10 @@ const ProgressionScreen = props => {
       />
       <FooterComponent>
         <ZenButton
-          customStyle={{ backgroundColor: Colors.light.button.primary }}
+          customStyle={{
+            backgroundColor: Colors.light.button.primary,
+            flex: 1
+          }}
           onPress={addProgressionHandler}>
           <Text style={styles.addButtonText}>Add</Text>
         </ZenButton>

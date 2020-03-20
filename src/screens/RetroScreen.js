@@ -90,13 +90,17 @@ const RetroScreen = props => {
         <ZenButton
           customStyle={{
             width: 150,
-            backgroundColor: Colors.light.button.secondary
+            backgroundColor: Colors.light.button.secondary,
+            flex: 1
           }}
           onPress={() => Alert.alert("pressed this button")}>
           <Text style={styles.addButtonText}>Action Items</Text>
         </ZenButton>
         <ZenButton
-          customStyle={{ backgroundColor: Colors.light.button.primary }}
+          customStyle={{
+            backgroundColor: Colors.light.button.primary,
+            flex: 1
+          }}
           onPress={addRetroHandler}>
           <Text style={styles.addButtonText}>Add</Text>
         </ZenButton>
