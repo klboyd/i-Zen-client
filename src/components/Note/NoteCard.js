@@ -36,7 +36,7 @@ const NoteCard = props => {
         {
           text: "Delete",
           style: "destructive",
-          onPress: () => removeNoteCard()
+          onPress: removeNoteCard
         }
       ],
       { cancelable: false }

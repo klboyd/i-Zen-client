@@ -5,7 +5,7 @@ const Colors = {
     background: {
       header: "#4682b4aa",
       content: "#eeeeee",
-      subHeader: "#9999aa44"
+      subHeader: "#4682b466"
     },
     button: {
       primary: "#82b446cc",

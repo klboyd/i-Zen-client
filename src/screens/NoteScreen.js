@@ -11,31 +11,32 @@ import { getAll } from "../modules/APIManager";
 import NoteList from "../components/Note/NoteList";
 
 const NoteScreen = props => {
-  const [positiveNotes, setPositiveNotes] = useState([]);
-  const [negativeNotes, setNegativeNotes] = useState([]);
+  const [boards, setBoards] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const getNotesHandler = async () => {
-    let positiveNotes = [];
-    let negativeNotes = [];
+    const allBoards = await getAll(
+      `retronoteboards?retro=${props.route.params.retroId}`
+    );
 
-    const notes = await getAll(`notes?retro=${props.route.params.retroId}`);
-
-    notes.forEach(note => {
-      if (note.retro_note_board.note_board.board_type === "positive") {
-        positiveNotes.push(note);
-      } else if (note.retro_note_board.note_board.board_type === "negative") {
-        negativeNotes.push(note);
-      }
+    const boards = allBoards.map(board => {
+      return {
+        id: board.id,
+        name: board.note_board.name,
+        type: board.note_board.board_type
+      };
     });
-    setPositiveNotes(positiveNotes);
-    setNegativeNotes(negativeNotes);
+
+    setBoards(boards);
   };
+
   const addNoteHandler = () => setIsFormVisible(true);
 
   const loadNotes = async () => {
-    await getNotesHandler();
+    return await getNotesHandler();
   };
+
+  const onOpenActionItems = () => Alert.alert("pressed the action item button");
 
   useEffect(() => {
     if (isFormVisible === false) {
@@ -55,48 +56,21 @@ const NoteScreen = props => {
     prevOpenedRow = row[index];
   };
   return (
-    <ScreenContainer style={{ ...styles.screen, ...props.style }}>
-      <NoteList
-        title="What went well?"
-        notes={positiveNotes}
-        row={row}
-        prevOpenedRow={prevOpenedRow}
-        closeRow={closeRow}
-        closeSelf={closeSelf}
-        loadNotes={loadNotes}
-        navigation={props.navigation}
-      />
-      <NoteList
-        title="What went to hell?"
-        notes={negativeNotes}
-        row={row}
-        prevOpenedRow={prevOpenedRow}
-        closeRow={closeRow}
-        closeSelf={closeSelf}
-        loadNotes={loadNotes}
-        navigation={props.navigation}
-      />
-      <FooterComponent>
-        <ZenButton
-          customStyle={{
-            width: 150,
-            backgroundColor: Colors.light.button.secondary,
-            flex: 1
-          }}
-          onPress={() => Alert.alert("pressed this button")}>
-          <Text style={styles.addButtonText}>Action Items</Text>
-        </ZenButton>
-        {/* <ZenButton
-          customStyle={{ backgroundColor: Colors.light.button.primary }}
-          onPress={addNoteHandler}>
-          <Text style={styles.addButtonText}>Add</Text>
-        </ZenButton> */}
-      </FooterComponent>
-      {/* <NoteFormModal
-        onConfirm={() => setIsFormVisible(false)}
-        onCancel={() => setIsFormVisible(false)}
-        isFormVisible={isFormVisible}
-      /> */}
+    <ScreenContainer
+      style={{ ...styles.screen, ...props.style }}
+      onOpenActionItems={onOpenActionItems}>
+      {boards.map(board => (
+        <NoteList
+          key={board.id}
+          boardDetails={board}
+          row={row}
+          prevOpenedRow={prevOpenedRow}
+          closeRow={closeRow}
+          closeSelf={closeSelf}
+          loadNotes={loadNotes}
+          navigation={props.navigation}
+        />
+      ))}
     </ScreenContainer>
   );
 };

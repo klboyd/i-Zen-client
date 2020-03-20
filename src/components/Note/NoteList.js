@@ -1,26 +1,38 @@
-import React from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, Text, FlatList, Alert } from "react-native";
 
 import NoteCard from "./NoteCard";
-
-import Colors from "../../modules/Colors";
 import ZenButton from "../ButtonComponent/ZenButton";
 
+import Colors from "../../modules/Colors";
+import { getAll } from "../../modules/APIManager";
+
 const NoteList = props => {
+  const [notes, setNotes] = useState([]);
+
+  const loadNotes = async () => {
+    const notes = await getAll(`notes?board=${props.boardDetails.id}`);
+    setNotes(notes);
+  };
+
+  const openAddNoteForm = () => Alert.alert("hey");
+
+  useEffect(() => {
+    loadNotes();
+  }, []);
+
   return (
     <>
-      {props.title && (
-        <View style={styles.listTitle}>
-          <Text style={styles.listTitleText}>{props.title}</Text>
-          <ZenButton customStyle={styles.addButton}>
-            <Text style={{ color: "white", fontSize: 20 }}>+</Text>
-          </ZenButton>
-        </View>
-      )}
+      <View style={styles.listTitle}>
+        <Text style={styles.listTitleText}>{props.boardDetails.name}</Text>
+        <ZenButton customStyle={styles.addButton} onPress={openAddNoteForm}>
+          <Text style={{ color: "white", fontSize: 20 }}>+</Text>
+        </ZenButton>
+      </View>
       <FlatList
         keyExtractor={(item, index) => `${item.id}`}
         style={styles.listContent}
-        data={props.notes}
+        data={notes}
         renderItem={note => (
           <NoteCard
             style={{
@@ -61,6 +73,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20
   },
   addButton: {
+    backgroundColor: Colors.light.button.primary,
     height: 35,
     width: 35
   }
