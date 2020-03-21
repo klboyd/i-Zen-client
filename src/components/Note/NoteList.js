@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, Alert } from "react-native";
 
+import FormModalContainer from "../Note/NoteFormModal";
 import NoteCard from "./NoteCard";
 import ZenButton from "../ButtonComponent/ZenButton";
 
@@ -9,14 +10,19 @@ import { getAll } from "../../modules/APIManager";
 
 const NoteList = props => {
   const [notes, setNotes] = useState([]);
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const loadNotes = async () => {
     const notes = await getAll(`notes?board=${props.boardDetails.id}`);
     setNotes(notes);
   };
 
-  const openAddNoteForm = () => Alert.alert("hey");
-
+  const openAddNoteForm = () => setIsFormVisible(true);
+  const closeAddNoteForm = () => setIsFormVisible(false);
+  const onConfirm = async () => {
+    setIsFormVisible(false);
+    loadNotes();
+  };
   useEffect(() => {
     loadNotes();
   }, []);
@@ -46,12 +52,19 @@ const NoteList = props => {
             closeRow={props.closeRow}
             closeSelf={props.closeSelf}
             navigation={props.navigation}
-            loadNotes={props.loadNotes}
+            loadNotes={loadNotes}
             cardIndex={note.index}
             cardId={note.item.id}
             note={note.item}
           />
         )}
+      />
+      <FormModalContainer
+        boardDetails={props.boardDetails}
+        setIsFormVisible={setIsFormVisible}
+        isFormVisible={isFormVisible}
+        onCancel={closeAddNoteForm}
+        onConfirm={onConfirm}
       />
     </>
   );
