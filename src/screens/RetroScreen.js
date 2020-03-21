@@ -49,7 +49,7 @@ const RetroScreen = props => {
       { cancelable: false }
     );
   };
-
+  const onOpenActionItems = () => Alert.alert("pressed the action item button");
   useEffect(() => {
     loadRetros();
   }, []);
@@ -67,7 +67,10 @@ const RetroScreen = props => {
   };
 
   return (
-    <ScreenContainer style={{ ...styles.screen, ...props.style }}>
+    <ScreenContainer
+      style={{ ...styles.screen, ...props.style }}
+      onOpenActionItems={onOpenActionItems}
+      onAddItem={addRetroHandler}>
       <FlatList
         keyExtractor={(item, index) => `${item.id}`}
         style={{ width: "100%" }}
@@ -86,21 +89,6 @@ const RetroScreen = props => {
           />
         )}
       />
-      <FooterComponent>
-        <ZenButton
-          customStyle={{
-            width: 150,
-            backgroundColor: Colors.light.button.secondary
-          }}
-          onPress={() => Alert.alert("pressed this button")}>
-          <Text style={styles.addButtonText}>Action Items</Text>
-        </ZenButton>
-        <ZenButton
-          customStyle={{ backgroundColor: Colors.light.button.primary }}
-          onPress={addRetroHandler}>
-          <Text style={styles.addButtonText}>Add</Text>
-        </ZenButton>
-      </FooterComponent>
     </ScreenContainer>
   );
 };

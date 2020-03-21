@@ -4,7 +4,8 @@ const Colors = {
   light: {
     background: {
       header: "#4682b4aa",
-      content: "#eeeeee"
+      content: "#eeeeee",
+      subHeader: "#4682b466"
     },
     button: {
       primary: "#82b446cc",

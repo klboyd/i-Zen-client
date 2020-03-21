@@ -1,7 +1,7 @@
 // card for displaying note details
 // plus edit/delete functionality
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
 // import NoteEditFormModal from "../Note/NoteEditFormModal";
@@ -12,6 +12,7 @@ import { removeItem } from "../../modules/APIManager";
 
 const NoteCard = props => {
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+  // const [isLoading, setIsLoading] = useState(true);
 
   const removeNoteCard = async () => {
     await removeItem("notes", Number(props.note.id));
@@ -36,7 +37,7 @@ const NoteCard = props => {
         {
           text: "Delete",
           style: "destructive",
-          onPress: () => removeNoteCard()
+          onPress: removeNoteCard
         }
       ],
       { cancelable: false }
@@ -46,20 +47,28 @@ const NoteCard = props => {
     props.closeSelf(props.cardIndex);
     setIsEditFormVisible(true);
   };
-  const onPress = () => {
-    props.navigation.navigate("Retro", {
-      noteId: props.cardId
-    });
-  };
+  // const onPress = () => {
+  //   props.navigation.navigate("Retro", {
+  //     noteId: props.cardId
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   setIsLoading(false);
+  // }, []);
+
   return (
     <SwipeableCard
       {...props}
-      handlePress={onPress}
+      // handlePress={onPress}
+      // isLoading={isLoading}
       onLeftSwipe={onLeftSwipe}
       onRightSwipe={onRightSwipe}>
       <View>
-        <View style={{ ...styles.card, ...props.style }}>
-          <Text style={styles.cardDescription}>{props.note.description}</Text>
+        <View style={{ backgroundColor: "white" }}>
+          <View style={{ ...styles.card, ...props.style }}>
+            <Text style={styles.cardDescription}>{props.note.description}</Text>
+          </View>
         </View>
         {/* <NoteEditFormModal
           onConfirm={onEditConfirm}
@@ -75,7 +84,7 @@ const NoteCard = props => {
 const styles = StyleSheet.create({
   card: {
     width: "100%",
-    height: 60,
+    minHeight: 60,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 0.5,
@@ -85,7 +94,10 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   cardDescription: {
-    fontSize: 14
+    margin: 8,
+    fontSize: 20,
+    // color: "white",
+    textAlign: "center"
   }
 });
 

@@ -36,7 +36,7 @@ const ProgressionCard = props => {
         {
           text: "Delete",
           style: "destructive",
-          onPress: () => removeProgessionCard()
+          onPress: removeProgessionCard
         }
       ],
       { cancelable: false }

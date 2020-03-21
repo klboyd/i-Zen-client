@@ -42,7 +42,9 @@ const ProgressionScreen = props => {
     prevOpenedRow = row[index];
   };
   return (
-    <ScreenContainer style={{ ...styles.screen, ...props.style }}>
+    <ScreenContainer
+      style={{ ...styles.screen, ...props.style }}
+      onAddItem={addProgressionHandler}>
       <FlatList
         keyExtractor={(item, index) => `${item.id}`}
         style={{ width: "100%" }}
@@ -61,13 +63,6 @@ const ProgressionScreen = props => {
           />
         )}
       />
-      <FooterComponent>
-        <ZenButton
-          customStyle={{ backgroundColor: Colors.light.button.primary }}
-          onPress={addProgressionHandler}>
-          <Text style={styles.addButtonText}>Add</Text>
-        </ZenButton>
-      </FooterComponent>
       <ProgressionFormModal
         onConfirm={() => setIsFormVisible(false)}
         onCancel={() => setIsFormVisible(false)}

@@ -1,6 +1,6 @@
-// form modal for creating a progression
+// form modal for creating a note
 
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
 import FormModalContainer from "../Modal/FormModalContainer";
@@ -10,53 +10,40 @@ import ZenButton from "../ButtonComponent/ZenButton";
 import Colors from "../../modules/Colors";
 import { postItem } from "../../modules/APIManager";
 
-const ProgressionFormModal = props => {
-  const [name, setName] = useState("");
+const NoteFormModal = props => {
   const [description, setDescription] = useState("");
 
   const cancelFormHandler = () => {
-    setName("");
     setDescription("");
     props.onCancel();
   };
 
   const confirmFormHandler = async () => {
-    if (name === "" || description === "") {
-      Alert.alert("Fields cannot be blank");
+    if (description === "") {
+      Alert.alert("Description cannot be blank");
     } else {
-      await postItem("progressions", { name: name, description: description });
-      setName("");
+      await postItem("notes", {
+        description: description,
+        board_id: props.boardDetails.id
+      });
       setDescription("");
       props.onConfirm();
     }
   };
 
-  const descriptionRef = useRef(null);
-
   return (
     <FormModalContainer
       style={{ ...styles.form, ...props.style }}
       isFormVisible={props.isFormVisible}>
-      <Text style={styles.formModalHeader}>Add New Progression</Text>
+      <Text style={styles.formModalHeader}>Add New Note</Text>
       <View style={styles.formContainer}>
-        <Text>What do you want to track?</Text>
+        <Text>{props.boardDetails.name}</Text>
         <InputFieldContainer
           autoFocus={true}
-          returnKeyType="next"
-          onSubmitEditing={() => descriptionRef.current.focus()}
-          inputStyle={styles.inputField}
-          placeholder="ex: Cooking More Meals"
-          value={name}
-          // autoCapitalize="none"
-          onChangeText={setName}
-        />
-        <Text>Why do you want to improve this?</Text>
-        <InputFieldContainer
-          setRef={input => (descriptionRef.current = input)}
           returnKeyType="done"
           onSubmitEditing={confirmFormHandler}
           inputStyle={styles.inputField}
-          placeholder="ex: To stop eating so much fast food"
+          placeholder={`Enter something ${props.boardDetails.type}!`}
           value={description}
           // autoCapitalize="none"
           onChangeText={setDescription}
@@ -103,4 +90,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProgressionFormModal;
+export default NoteFormModal;

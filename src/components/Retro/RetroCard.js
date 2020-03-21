@@ -16,6 +16,7 @@ const RetroCard = props => {
   };
 
   const onLeftSwipe = async () => {
+    props.closeSelf(props.cardIndex);
     Alert.alert(
       "Delete this Retro?",
       "It'll be gone for good!",

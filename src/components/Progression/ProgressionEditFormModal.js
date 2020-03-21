@@ -1,6 +1,6 @@
 // form modal for editing a progression
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
 import FormModalContainer from "../Modal/FormModalContainer";
@@ -54,6 +54,8 @@ const ProgressionEditFormModal = props => {
     }
   }, [props.isEditFormVisible]);
 
+  const descriptionRef = useRef(null);
+
   return (
     <FormModalContainer
       style={{ ...styles.form, ...props.style }}
@@ -62,6 +64,9 @@ const ProgressionEditFormModal = props => {
       <View style={styles.formContainer}>
         <Text>Name</Text>
         <InputFieldContainer
+          autoFocus={true}
+          returnKeyType="next"
+          onSubmitEditing={() => descriptionRef.current.focus()}
           inputStyle={styles.inputField}
           placeholder="ex: Cooking More Meals"
           value={name}
@@ -71,6 +76,9 @@ const ProgressionEditFormModal = props => {
         />
         <Text>Description</Text>
         <InputFieldContainer
+          setRef={input => (descriptionRef.current = input)}
+          returnKeyType="done"
+          onSubmitEditing={confirmFormHandler}
           inputStyle={styles.inputField}
           placeholder="ex: To stop eating so much fast food"
           value={description}

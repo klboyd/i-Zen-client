@@ -6,6 +6,7 @@ import { StyleSheet, TextInput, ShadowPropTypesIOS } from "react-native";
 const InputField = props => {
   return (
     <TextInput
+      ref={props.setRef}
       placeholderTextColor="grey"
       style={{ ...styles.input, ...props.inputStyle }}
       {...props}>

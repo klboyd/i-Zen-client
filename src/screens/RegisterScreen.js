@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, View, Text, Alert, AsyncStorage } from "react-native";
 
 import InputFieldContainer from "../components/Input/InputFieldContainer";
@@ -37,23 +37,39 @@ const RegisterScreen = props => {
     }
   };
 
+  const passwordRef = useRef();
+  const validatePasswordRef = useRef();
+  const firstnameRef = useRef();
+  const lastnameRef = useRef();
+
   return (
     <ScreenContainer style={{ ...styles.screen, ...props.style }}>
       <Text style={styles.registerMessage}>Register a new Account</Text>
       <InputFieldContainer
+        autoFocus={true}
+        returnKeyType="next"
+        onSubmitEditing={() => passwordRef.current.focus()}
         placeholder="Username"
+        required
         value={username}
         autoCapitalize="none"
         onChangeText={text => setUsername(text)}
       />
       <InputFieldContainer
+        setRef={input => (passwordRef.current = input)}
+        returnKeyType="next"
+        onSubmitEditing={() => validatePasswordRef.current.focus()}
         placeholder="Password"
+        required
         value={password}
         secureTextEntry={true}
         onChangeText={text => setPassword(text)}
       />
 
       <InputFieldContainer
+        setRef={input => (validatePasswordRef.current = input)}
+        returnKeyType="next"
+        onSubmitEditing={() => firstnameRef.current.focus()}
         placeholder="Verify Password"
         required
         value={verifyPassword}
@@ -61,11 +77,17 @@ const RegisterScreen = props => {
         onChangeText={text => setVerifyPassword(text)}
       />
       <InputFieldContainer
+        setRef={input => (firstnameRef.current = input)}
+        returnKeyType="next"
+        onSubmitEditing={() => lastnameRef.current.focus()}
         placeholder="First name (optional)"
         value={firstname}
         onChangeText={text => setFirstname(text)}
       />
       <InputFieldContainer
+        setRef={input => (lastnameRef.current = input)}
+        returnKeyType="done"
+        onSubmitEditing={registerNewUserHandler}
         placeholder="Last name (optional)"
         value={lastname}
         onChangeText={text => setLastname(text)}
