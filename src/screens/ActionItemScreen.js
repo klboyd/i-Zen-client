@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList, Text, View, Alert } from "react-native";
 
-// import ActionItemFormModal from "../components/ActionItem/ActionItemFormModal";
+import ActionItemFormModal from "../components/ActionItem/ActionItemFormModal";
 import ActionItemCard from "../components/ActionItem/ActionItemCard";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
 import ZenButton from "../components/ButtonComponent/ZenButton";
@@ -27,7 +27,7 @@ const ActionItemScreen = props => {
     return await getActionItemsHandler();
   };
 
-  const onAddItem = () => Alert.alert("pressed the addn item button");
+  const onAddItem = () => setIsFormVisible(true);
 
   useEffect(() => {
     if (isFormVisible === false) {
@@ -68,6 +68,12 @@ const ActionItemScreen = props => {
             actionItem={actionItem.item}
           />
         )}
+      />
+      <ActionItemFormModal
+        onConfirm={() => setIsFormVisible(false)}
+        onCancel={() => setIsFormVisible(false)}
+        isFormVisible={isFormVisible}
+        progressionId={props.route.params.progressionId}
       />
     </ScreenContainer>
   );

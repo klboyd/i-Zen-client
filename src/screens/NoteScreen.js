@@ -38,7 +38,7 @@ const NoteScreen = props => {
 
   const onOpenActionItems = () =>
     props.navigation.navigate("Action Items", {
-      progressionId: props.progressionId
+      progressionId: props.route.params.progressionId
     });
 
   useEffect(() => {
