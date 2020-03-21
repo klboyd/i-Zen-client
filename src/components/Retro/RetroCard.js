@@ -36,7 +36,8 @@ const RetroCard = props => {
   };
   const onPress = () => {
     props.navigation.navigate("Notes", {
-      retroId: props.cardId
+      retroId: props.cardId,
+      progressionId: props.progressionId
     });
   };
   return (

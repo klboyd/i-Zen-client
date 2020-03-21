@@ -49,7 +49,11 @@ const RetroScreen = props => {
       { cancelable: false }
     );
   };
-  const onOpenActionItems = () => Alert.alert("pressed the action item button");
+  const onOpenActionItems = () =>
+    props.navigation.navigate("Action Items", {
+      progressionId: props.route.params.progressionId
+    });
+
   useEffect(() => {
     loadRetros();
   }, []);
@@ -86,6 +90,7 @@ const RetroScreen = props => {
             navigation={props.navigation}
             loadRetros={loadRetros}
             retro={retro.item}
+            progressionId={props.route.params.progressionId}
           />
         )}
       />

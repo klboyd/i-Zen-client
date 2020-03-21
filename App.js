@@ -10,10 +10,11 @@ import HeaderButton from "./src/components/Header/HeaderButton";
 import Colors from "./src/modules/Colors";
 import { logout } from "./src/modules/APIManager";
 
+import ActionItemScreen from "./src/screens/ActionItemScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import NoteScreen from "./src/screens/NoteScreen";
-import RegisterScreen from "./src/screens/RegisterScreen";
 import ProgressionScreen from "./src/screens/ProgressionScreen";
+import RegisterScreen from "./src/screens/RegisterScreen";
 import RetroScreen from "./src/screens/RetroScreen";
 
 export default function App() {
@@ -100,6 +101,14 @@ export default function App() {
                 headerTitleAlign: "center"
               }}>
               {props => <NoteScreen {...props} />}
+            </Stack.Screen>
+            <Stack.Screen
+              name="Action Items"
+              options={{
+                headerStyle: styles.headerStyle,
+                headerTitleAlign: "center"
+              }}>
+              {props => <ActionItemScreen {...props} />}
             </Stack.Screen>
           </>
         )}
