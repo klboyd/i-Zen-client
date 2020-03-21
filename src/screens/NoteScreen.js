@@ -36,7 +36,10 @@ const NoteScreen = props => {
     return await getNotesHandler();
   };
 
-  const onOpenActionItems = () => Alert.alert("pressed the action item button");
+  const onOpenActionItems = () =>
+    props.navigation.navigate("Action Items", {
+      progressionId: props.progressionId
+    });
 
   useEffect(() => {
     if (isFormVisible === false) {

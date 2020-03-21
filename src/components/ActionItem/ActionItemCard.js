@@ -1,4 +1,4 @@
-// card for displaying retro details
+// card for displaying actionItem details
 // plus edit/delete functionality
 
 import React, { useState } from "react";
@@ -9,16 +9,18 @@ import SwipeableCard from "../Card/SwipeableCard";
 import Colors from "../../modules/Colors";
 import { removeItem } from "../../modules/APIManager";
 
-const RetroCard = props => {
-  const removeRetroCard = async () => {
-    await removeItem("retros", Number(props.retro.id));
-    await props.loadRetros();
+const ActionItemCard = props => {
+  const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+
+  const removeActionItemCard = async () => {
+    await removeItem("actionitems", Number(props.actionItem.id));
+    await props.loadActionItems();
   };
 
   const onLeftSwipe = async () => {
     props.closeSelf(props.cardIndex);
     Alert.alert(
-      "Delete this Retro?",
+      "Delete this ActionItem?",
       "It'll be gone for good!",
       [
         {
@@ -28,22 +30,30 @@ const RetroCard = props => {
         {
           text: "Delete",
           style: "destructive",
-          onPress: removeRetroCard
+          onPress: removeActionItemCard
         }
       ],
       { cancelable: false }
     );
   };
-  const onPress = () => {
-    props.navigation.navigate("Notes", {
-      retroId: props.cardId,
-      progressionId: props.progressionId
-    });
+  const onRightSwipe = async () => {
+    props.closeSelf(props.cardIndex);
+    setIsEditFormVisible(true);
   };
+  // const onPress = () => {
+  //   props.navigation.navigate("Notes", {
+  //     actionItemId: props.cardId,
+  //     progressionId: props.progressionId
+  //   });
+  // };
   return (
-    <SwipeableCard {...props} handlePress={onPress} onLeftSwipe={onLeftSwipe}>
+    <SwipeableCard
+      {...props}
+      // handlePress={onPress}
+      onLeftSwipe={onLeftSwipe}
+      onRightSwipe={onRightSwipe}>
       <View style={{ ...styles.card, ...props.style }}>
-        <Text style={styles.cardText}>{props.retro.name}</Text>
+        <Text style={styles.cardText}>{props.actionItem.description}</Text>
       </View>
     </SwipeableCard>
   );
@@ -67,4 +77,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default RetroCard;
+export default ActionItemCard;
