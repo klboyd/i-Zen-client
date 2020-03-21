@@ -27,6 +27,18 @@ const NoteList = props => {
     loadNotes();
   }, []);
 
+  let row = [];
+  let prevOpenedRow;
+  const closeSelf = index => {
+    row[index].close();
+  };
+  const closeRow = index => {
+    if (prevOpenedRow && prevOpenedRow !== row[index]) {
+      prevOpenedRow.close();
+    }
+    prevOpenedRow = row[index];
+  };
+
   return (
     <>
       <View style={styles.listTitle}>
@@ -47,10 +59,10 @@ const NoteList = props => {
                   note.item.retro_note_board.note_board.board_type
                 ]
             }}
-            row={props.row}
-            prevOpenedRow={props.prevOpenedRow}
-            closeRow={props.closeRow}
-            closeSelf={props.closeSelf}
+            row={row}
+            prevOpenedRow={prevOpenedRow}
+            closeRow={closeRow}
+            closeSelf={closeSelf}
             navigation={props.navigation}
             loadNotes={loadNotes}
             cardIndex={note.index}

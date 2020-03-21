@@ -39,6 +39,9 @@ const NoteFormModal = props => {
       <View style={styles.formContainer}>
         <Text>{props.boardDetails.name}</Text>
         <InputFieldContainer
+          autoFocus={true}
+          returnKeyType="done"
+          onSubmitEditing={confirmFormHandler}
           inputStyle={styles.inputField}
           placeholder={`Enter something ${props.boardDetails.type}!`}
           value={description}

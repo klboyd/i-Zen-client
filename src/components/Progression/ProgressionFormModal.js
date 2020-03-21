@@ -1,6 +1,6 @@
 // form modal for creating a progression
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
 import FormModalContainer from "../Modal/FormModalContainer";
@@ -31,6 +31,8 @@ const ProgressionFormModal = props => {
     }
   };
 
+  const descriptionRef = useRef(null);
+
   return (
     <FormModalContainer
       style={{ ...styles.form, ...props.style }}
@@ -39,6 +41,9 @@ const ProgressionFormModal = props => {
       <View style={styles.formContainer}>
         <Text>What do you want to track?</Text>
         <InputFieldContainer
+          autoFocus={true}
+          returnKeyType="next"
+          onSubmitEditing={() => descriptionRef.current.focus()}
           inputStyle={styles.inputField}
           placeholder="ex: Cooking More Meals"
           value={name}
@@ -47,6 +52,9 @@ const ProgressionFormModal = props => {
         />
         <Text>Why do you want to improve this?</Text>
         <InputFieldContainer
+          setRef={input => (descriptionRef.current = input)}
+          returnKeyType="done"
+          onSubmitEditing={confirmFormHandler}
           inputStyle={styles.inputField}
           placeholder="ex: To stop eating so much fast food"
           value={description}

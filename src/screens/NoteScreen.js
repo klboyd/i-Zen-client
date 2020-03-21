@@ -44,17 +44,6 @@ const NoteScreen = props => {
     }
   }, [isFormVisible]);
 
-  let row = [];
-  let prevOpenedRow;
-  const closeSelf = index => {
-    row[index].close();
-  };
-  const closeRow = index => {
-    if (prevOpenedRow && prevOpenedRow !== row[index]) {
-      prevOpenedRow.close();
-    }
-    prevOpenedRow = row[index];
-  };
   return (
     <ScreenContainer
       style={{ ...styles.screen, ...props.style }}
@@ -63,10 +52,6 @@ const NoteScreen = props => {
         <NoteList
           key={board.id}
           boardDetails={board}
-          row={row}
-          prevOpenedRow={prevOpenedRow}
-          closeRow={closeRow}
-          closeSelf={closeSelf}
           loadNotes={loadNotes}
           navigation={props.navigation}
         />

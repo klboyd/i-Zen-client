@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, View, Text } from "react-native";
 
 import InputFieldContainer from "../components/Input/InputFieldContainer";
@@ -21,6 +21,8 @@ const LoginScreen = props => {
     response && props.setIsAuthenticated(true);
   };
 
+  const passwordRef = useRef();
+
   return (
     <ScreenContainer style={{ ...styles.screen, ...props.style }}>
       <View style={styles.welcomeContainer}>
@@ -28,12 +30,18 @@ const LoginScreen = props => {
         <Text style={styles.welcomeMessage}>Please log in</Text>
       </View>
       <InputFieldContainer
+        returnKeyType="next"
+        onSubmitEditing={() => passwordRef.current.focus()}
+        autoFocus={true}
         placeholder="Username"
         value={username}
         autoCapitalize="none"
         onChangeText={text => setUsername(text)}
       />
       <InputFieldContainer
+        setRef={input => (passwordRef.current = input)}
+        returnKeyType="done"
+        onSubmitEditing={loginHandler}
         placeholder="Password"
         value={password}
         secureTextEntry={true}
