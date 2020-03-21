@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
-// import NoteEditFormModal from "../Note/NoteEditFormModal";
+import NoteEditFormModal from "../Note/NoteEditFormModal";
 import SwipeableCard from "../Card/SwipeableCard";
 
 import Colors from "../../modules/Colors";
@@ -70,12 +70,13 @@ const NoteCard = props => {
             <Text style={styles.cardDescription}>{props.note.description}</Text>
           </View>
         </View>
-        {/* <NoteEditFormModal
+        <NoteEditFormModal
           onConfirm={onEditConfirm}
           onCancel={() => setIsEditFormVisible(false)}
           isEditFormVisible={isEditFormVisible}
           cardId={props.cardId}
-        /> */}
+          boardDetails={props.boardDetails}
+        />
       </View>
     </SwipeableCard>
   );

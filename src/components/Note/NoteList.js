@@ -68,6 +68,7 @@ const NoteList = props => {
             cardIndex={note.index}
             cardId={note.item.id}
             note={note.item}
+            boardDetails={props.boardDetails}
           />
         )}
       />
