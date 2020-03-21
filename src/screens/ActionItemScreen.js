@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList, Text, View, Alert } from "react-native";
 
-import FooterComponent from "../components/Footer/FooterComponent";
 // import ActionItemFormModal from "../components/ActionItem/ActionItemFormModal";
+import ActionItemCard from "../components/ActionItem/ActionItemCard";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
 import ZenButton from "../components/ButtonComponent/ZenButton";
 
 import Colors from "../modules/Colors";
 import { getAll } from "../modules/APIManager";
-// import ActionItemList from "../components/ActionItem/ActionItemList";
 
 const ActionItemScreen = props => {
   const [actionItems, setActionItems] = useState([]);
@@ -28,7 +27,7 @@ const ActionItemScreen = props => {
     return await getActionItemsHandler();
   };
 
-  const onAddItem = () => Alert.alert("pressed the action item button");
+  const onAddItem = () => Alert.alert("pressed the addn item button");
 
   useEffect(() => {
     if (isFormVisible === false) {
@@ -36,21 +35,40 @@ const ActionItemScreen = props => {
     }
   }, [isFormVisible]);
 
+  let row = [];
+  let prevOpenedRow;
+  const closeSelf = index => {
+    row[index].close();
+  };
+  const closeRow = index => {
+    if (prevOpenedRow && prevOpenedRow !== row[index]) {
+      prevOpenedRow.close();
+    }
+    prevOpenedRow = row[index];
+  };
+
   return (
     <ScreenContainer
       style={{ ...styles.screen, ...props.style }}
       onAddItem={onAddItem}>
-      {actionItems.map(actionItem => (
-        <View>
-          <Text key={actionItem.id}>{actionItem.description}</Text>
-        </View>
-        // <ActionItemList
-        //   key={actionItem.id}
-        //   actionItemDetails={actionItem}
-        //   loadActionItems={loadActionItems}
-        //   navigation={props.navigation}
-        // />
-      ))}
+      <FlatList
+        keyExtractor={(item, index) => `${item.id}`}
+        style={{ width: "100%" }}
+        data={actionItems}
+        renderItem={actionItem => (
+          <ActionItemCard
+            row={row}
+            prevOpenedRow={prevOpenedRow}
+            closeRow={closeRow}
+            closeSelf={closeSelf}
+            navigation={props.navigation}
+            cardIndex={actionItem.index}
+            cardId={actionItem.item.id}
+            loadActionItems={loadActionItems}
+            actionItem={actionItem.item}
+          />
+        )}
+      />
     </ScreenContainer>
   );
 };
