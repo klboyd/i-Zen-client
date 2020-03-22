@@ -66,6 +66,10 @@ const ActionItemScreen = props => {
             cardId={actionItem.item.id}
             loadActionItems={loadActionItems}
             actionItem={actionItem.item}
+            style={{
+              backgroundColor:
+                Colors.light.actionCard[actionItem.item.status.name]
+            }}
           />
         )}
       />

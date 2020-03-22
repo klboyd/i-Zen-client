@@ -8,7 +8,7 @@ import ActionItemEditFormModal from "./ActionItemEditFormModal";
 import SwipeableCard from "../Card/SwipeableCard";
 
 import Colors from "../../modules/Colors";
-import { removeItem } from "../../modules/APIManager";
+import { patchItem, removeItem } from "../../modules/APIManager";
 
 const ActionItemCard = props => {
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
@@ -21,10 +21,16 @@ const ActionItemCard = props => {
     setIsEditFormVisible(false);
     props.loadActionItems();
   };
+
+  const onComplete = async () => {
+    await patchItem("actionitems", props.actionItem.id, {});
+    props.loadActionItems();
+  };
+
   const onLeftSwipe = async () => {
     props.closeSelf(props.cardIndex);
     Alert.alert(
-      "Delete this ActionItem?",
+      "Delete this Action Item?",
       "It'll be gone for good!",
       [
         {
@@ -41,11 +47,29 @@ const ActionItemCard = props => {
     );
   };
   const onRightSwipe = async () => {
-    props.closeSelf(props.cardIndex);
-    setIsEditFormVisible(true);
+    if (props.actionItem.status.name !== "completed") {
+      props.closeSelf(props.cardIndex);
+      setIsEditFormVisible(true);
+    }
   };
   const onPress = () => {
-    Alert.alert(`pressed action item #${props.actionItem.id}`);
+    if (props.actionItem.status.name !== "completed") {
+      Alert.alert(
+        "Mark this Action Item as complete?",
+        "It'll be gone for good!",
+        [
+          {
+            text: "Cancel",
+            style: "cancel"
+          },
+          {
+            text: "Complete",
+            onPress: onComplete
+          }
+        ],
+        { cancelable: false }
+      );
+    }
   };
   return (
     <>
@@ -53,8 +77,10 @@ const ActionItemCard = props => {
         {...props}
         handlePress={onPress}
         onLeftSwipe={onLeftSwipe}
-        onRightSwipe={onRightSwipe}>
-        <View>
+        onRightSwipe={
+          props.actionItem.status.name !== "completed" && onRightSwipe
+        }>
+        <View style={{ backgroundColor: "white" }}>
           <View style={{ ...styles.card, ...props.style }}>
             <Text style={styles.cardText}>{props.actionItem.description}</Text>
           </View>
@@ -85,6 +111,9 @@ const styles = StyleSheet.create({
   },
   cardDescription: {
     fontSize: 14
+  },
+  completedCard: {
+    backgroundColor: Colors.light.background.subHeader
   }
 });
 
