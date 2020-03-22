@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
+import ActionItemEditFormModal from "./ActionItemEditFormModal";
 import SwipeableCard from "../Card/SwipeableCard";
 
 import Colors from "../../modules/Colors";
@@ -16,7 +17,10 @@ const ActionItemCard = props => {
     await removeItem("actionitems", Number(props.actionItem.id));
     await props.loadActionItems();
   };
-
+  const onEditConfirm = () => {
+    setIsEditFormVisible(false);
+    props.loadActionItems();
+  };
   const onLeftSwipe = async () => {
     props.closeSelf(props.cardIndex);
     Alert.alert(
@@ -40,22 +44,29 @@ const ActionItemCard = props => {
     props.closeSelf(props.cardIndex);
     setIsEditFormVisible(true);
   };
-  // const onPress = () => {
-  //   props.navigation.navigate("Notes", {
-  //     actionItemId: props.cardId,
-  //     progressionId: props.progressionId
-  //   });
-  // };
+  const onPress = () => {
+    Alert.alert(`pressed action item #${props.actionItem.id}`);
+  };
   return (
-    <SwipeableCard
-      {...props}
-      // handlePress={onPress}
-      onLeftSwipe={onLeftSwipe}
-      onRightSwipe={onRightSwipe}>
-      <View style={{ ...styles.card, ...props.style }}>
-        <Text style={styles.cardText}>{props.actionItem.description}</Text>
-      </View>
-    </SwipeableCard>
+    <>
+      <SwipeableCard
+        {...props}
+        handlePress={onPress}
+        onLeftSwipe={onLeftSwipe}
+        onRightSwipe={onRightSwipe}>
+        <View>
+          <View style={{ ...styles.card, ...props.style }}>
+            <Text style={styles.cardText}>{props.actionItem.description}</Text>
+          </View>
+          <ActionItemEditFormModal
+            onConfirm={onEditConfirm}
+            onCancel={() => setIsEditFormVisible(false)}
+            isEditFormVisible={isEditFormVisible}
+            cardId={props.actionItem.id}
+          />
+        </View>
+      </SwipeableCard>
+    </>
   );
 };
 
