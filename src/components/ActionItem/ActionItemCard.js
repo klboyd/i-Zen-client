@@ -4,10 +4,11 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
+import ActionItemEditFormModal from "./ActionItemEditFormModal";
 import SwipeableCard from "../Card/SwipeableCard";
 
 import Colors from "../../modules/Colors";
-import { removeItem } from "../../modules/APIManager";
+import { patchItem, removeItem } from "../../modules/APIManager";
 
 const ActionItemCard = props => {
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
@@ -16,11 +17,20 @@ const ActionItemCard = props => {
     await removeItem("actionitems", Number(props.actionItem.id));
     await props.loadActionItems();
   };
+  const onEditConfirm = () => {
+    setIsEditFormVisible(false);
+    props.loadActionItems();
+  };
+
+  const onComplete = async () => {
+    await patchItem("actionitems", props.actionItem.id, {});
+    props.loadActionItems();
+  };
 
   const onLeftSwipe = async () => {
     props.closeSelf(props.cardIndex);
     Alert.alert(
-      "Delete this ActionItem?",
+      "Delete this Action Item?",
       "It'll be gone for good!",
       [
         {
@@ -37,25 +47,52 @@ const ActionItemCard = props => {
     );
   };
   const onRightSwipe = async () => {
-    props.closeSelf(props.cardIndex);
-    setIsEditFormVisible(true);
+    if (props.actionItem.status.name !== "completed") {
+      props.closeSelf(props.cardIndex);
+      setIsEditFormVisible(true);
+    }
   };
-  // const onPress = () => {
-  //   props.navigation.navigate("Notes", {
-  //     actionItemId: props.cardId,
-  //     progressionId: props.progressionId
-  //   });
-  // };
+  const onPress = () => {
+    if (props.actionItem.status.name !== "completed") {
+      Alert.alert(
+        "Mark this Action Item as complete?",
+        "It'll be gone for good!",
+        [
+          {
+            text: "Cancel",
+            style: "cancel"
+          },
+          {
+            text: "Complete",
+            onPress: onComplete
+          }
+        ],
+        { cancelable: false }
+      );
+    }
+  };
   return (
-    <SwipeableCard
-      {...props}
-      // handlePress={onPress}
-      onLeftSwipe={onLeftSwipe}
-      onRightSwipe={onRightSwipe}>
-      <View style={{ ...styles.card, ...props.style }}>
-        <Text style={styles.cardText}>{props.actionItem.description}</Text>
-      </View>
-    </SwipeableCard>
+    <>
+      <SwipeableCard
+        {...props}
+        handlePress={onPress}
+        onLeftSwipe={onLeftSwipe}
+        onRightSwipe={
+          props.actionItem.status.name !== "completed" && onRightSwipe
+        }>
+        <View style={{ backgroundColor: "white" }}>
+          <View style={{ ...styles.card, ...props.style }}>
+            <Text style={styles.cardText}>{props.actionItem.description}</Text>
+          </View>
+          <ActionItemEditFormModal
+            onConfirm={onEditConfirm}
+            onCancel={() => setIsEditFormVisible(false)}
+            isEditFormVisible={isEditFormVisible}
+            cardId={props.actionItem.id}
+          />
+        </View>
+      </SwipeableCard>
+    </>
   );
 };
 
@@ -74,6 +111,9 @@ const styles = StyleSheet.create({
   },
   cardDescription: {
     fontSize: 14
+  },
+  completedCard: {
+    backgroundColor: Colors.light.background.subHeader
   }
 });
 

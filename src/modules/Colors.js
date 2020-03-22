@@ -19,6 +19,10 @@ const Colors = {
     noteCard: {
       positive: "#82b44655",
       negative: "#dc143c55"
+    },
+    actionCard: {
+      completed: "#82b446cc",
+      pending: "#eeeeee"
     }
   }
 };

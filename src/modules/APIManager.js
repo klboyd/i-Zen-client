@@ -95,6 +95,24 @@ const putItem = async (resource, id, updatedItem) => {
   }
 };
 
+const patchItem = async (resource, id, updatedItem) => {
+  const token = await getToken();
+
+  try {
+    await fetch(`${baseUrl}/${resource}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token
+      },
+      body: JSON.stringify(updatedItem)
+    });
+  } catch (error) {
+    console.log("PUT ITEM:", error);
+  }
+};
+
 const removeItem = async (resource, id) => {
   const token = await getToken();
   try {
@@ -160,6 +178,7 @@ export {
   getOne,
   postItem,
   putItem,
+  patchItem,
   removeItem,
   register,
   login,
