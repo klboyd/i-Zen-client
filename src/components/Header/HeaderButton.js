@@ -16,7 +16,8 @@ const HeaderButton = props => {
 const styles = StyleSheet.create({
   buttonText: {
     padding: 3,
-    fontSize: 14
+    fontSize: 14,
+    color: Colors.light.text.primary
   }
 });
 

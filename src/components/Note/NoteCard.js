@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     minHeight: 60,
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 0.5,
+    borderBottomWidth: 0.5,
     paddingVertical: 5
   },
   cardText: {

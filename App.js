@@ -72,16 +72,17 @@ export default function App() {
               options={{
                 headerStyle: styles.headerStyle,
                 headerTitleAlign: "center",
-                headerLeft: () => (
-                  <HeaderButton title="Logout" onPress={logoutHandler} />
-                ),
+                // headerLeft: () => (
+                //   <HeaderButton title="Logout" onPress={logoutHandler} />
+                // ),
                 headerRight: () => (
-                  <Ionicons
-                    style={{ paddingHorizontal: 20 }}
-                    name="md-person"
-                    size={32}
-                    color="black"
-                  />
+                  <HeaderButton title="Logout" onPress={logoutHandler} />
+                  // <Ionicons
+                  //   style={{ paddingHorizontal: 20 }}
+                  //   name="md-person"
+                  //   size={32}
+                  //   color="black"
+                  // />
                 )
               }}>
               {props => <ProgressionScreen {...props} />}

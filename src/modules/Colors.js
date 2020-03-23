@@ -8,13 +8,13 @@ const Colors = {
       subHeader: "#4682b466"
     },
     button: {
-      primary: "#82b446cc",
-      secondary: "#b44682cc",
+      primary: "#46b4afaa",
+      secondary: "#464bb4aa",
       negative: "#dc143c",
-      neutral: "#9999aa"
+      neutral: "#b47846"
     },
     text: {
-      primary: "#ffffff"
+      primary: "#ddd"
     },
     noteCard: {
       positive: "#82b44655",

@@ -12,7 +12,7 @@ const ZenButton = ({ customStyle, ...props }) => {
   buttonStyle = customStyle ? buttonStyle.concat(customStyle) : buttonStyle;
 
   return (
-    <TouchableOpacity style={buttonStyle} {...props}>
+    <TouchableOpacity activeOpacity={0.6} style={buttonStyle} {...props}>
       {props.children}
     </TouchableOpacity>
   );
@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
   zenButton: {
     paddingHorizontal: 8,
     // flex: 1,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 1,
     height: 45,
     width: 75,
     margin: 5,
