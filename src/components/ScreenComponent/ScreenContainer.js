@@ -47,6 +47,9 @@ const styles = StyleSheet.create({
     // width: "100%",
     alignItems: "center",
     justifyContent: "flex-start"
+  },
+  addButtonText: {
+    color: Colors.light.text.primary
   }
 });
 
