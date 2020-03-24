@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     padding: 3,
     fontSize: 14,
     color: "white"
+  },
+  buttonText: {
+    color: Colors.light.text.primary
   }
 });
 

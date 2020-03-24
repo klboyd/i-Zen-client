@@ -51,13 +51,13 @@ const LoginScreen = props => {
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.secondary }}
           onPress={() => props.navigation.navigate("Register")}>
-          <Text>Register</Text>
+          <Text style={styles.buttonText}>Register</Text>
         </ZenButton>
         <Text style={styles.buttonChoiceText}>or</Text>
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={loginHandler}>
-          <Text>Login</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </ZenButton>
       </View>
     </ScreenContainer>
@@ -73,16 +73,17 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   buttonContainer: {
-    // flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // width: "80%",
     marginTop: 20
   },
   buttonChoiceText: {
     fontSize: 20,
     marginVertical: 20
+  },
+  buttonText: {
+    color: Colors.light.text.primary
   }
 });
 

@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList, Text, Alert } from "react-native";
 
-import FooterComponent from "../components/Footer/FooterComponent";
 import RetroCard from "../components/Retro/RetroCard";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
-import ZenButton from "../components/ButtonComponent/ZenButton";
 
-import Colors from "../modules/Colors";
 import { getAll, postItem } from "../modules/APIManager";
 
 const RetroScreen = props => {

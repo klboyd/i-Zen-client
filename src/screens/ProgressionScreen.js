@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, FlatList, Text, Alert } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 
-import FooterComponent from "../components/Footer/FooterComponent";
 import ProgressionCard from "../components/Progression/ProgressionCard";
 import ProgressionFormModal from "../components/Progression/ProgressionFormModal";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
-import ZenButton from "../components/ButtonComponent/ZenButton";
 
-import Colors from "../modules/Colors";
 import { getAll } from "../modules/APIManager";
 
 const ProgressionScreen = props => {
@@ -79,7 +76,6 @@ const styles = StyleSheet.create({
   addButtonText: {
     padding: 3,
     fontSize: 14
-    // color: "white"
   }
 });
 

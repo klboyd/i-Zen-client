@@ -71,7 +71,6 @@ const ProgressionEditFormModal = props => {
           placeholder="ex: Cooking More Meals"
           value={name}
           required={true}
-          // autoCapitalize="none"
           onChangeText={setName}
         />
         <Text>Description</Text>
@@ -82,7 +81,6 @@ const ProgressionEditFormModal = props => {
           inputStyle={styles.inputField}
           placeholder="ex: To stop eating so much fast food"
           value={description}
-          // autoCapitalize="none"
           onChangeText={setDescription}
         />
       </View>
@@ -90,12 +88,12 @@ const ProgressionEditFormModal = props => {
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.secondary }}
           onPress={cancelFormHandler}>
-          <Text>Cancel</Text>
+          <Text style={styles.buttonText}>Cancel</Text>
         </ZenButton>
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={confirmFormHandler}>
-          <Text>Save</Text>
+          <Text style={styles.buttonText}>Save</Text>
         </ZenButton>
       </View>
     </FormModalContainer>
@@ -118,12 +116,13 @@ const styles = StyleSheet.create({
     width: "85%"
   },
   buttonContainer: {
-    // flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // width: "80%",
     marginTop: 20
+  },
+  buttonText: {
+    color: Colors.light.text.primary
   }
 });
 

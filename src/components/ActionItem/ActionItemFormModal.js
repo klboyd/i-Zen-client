@@ -1,9 +1,7 @@
 // form modal for creating a actionItem
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
-
-import RNPickerSelect from "react-native-picker-select";
 
 import FormModalContainer from "../Modal/FormModalContainer";
 import InputFieldContainer from "../Input/InputFieldContainer";
@@ -14,7 +12,6 @@ import { getAll, postItem } from "../../modules/APIManager";
 
 const ActionItemFormModal = props => {
   const [description, setDescription] = useState("");
-  const [dueDate, setDueDate] = useState(new Date().toISOString());
   const [actionItemStatuses, setActionItemStatuses] = useState([]);
 
   const getActionItemStatuses = async () => {
@@ -67,12 +64,12 @@ const ActionItemFormModal = props => {
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.secondary }}
           onPress={cancelFormHandler}>
-          <Text>Cancel</Text>
+          <Text style={styles.buttonText}>Cancel</Text>
         </ZenButton>
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={confirmFormHandler}>
-          <Text>Add</Text>
+          <Text style={styles.buttonText}>Add</Text>
         </ZenButton>
       </View>
     </FormModalContainer>
@@ -95,12 +92,13 @@ const styles = StyleSheet.create({
     width: "85%"
   },
   buttonContainer: {
-    // flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // width: "80%",
     marginTop: 20
+  },
+  buttonText: {
+    color: Colors.light.text.primary
   }
 });
 

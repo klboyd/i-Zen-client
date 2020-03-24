@@ -1,18 +1,16 @@
 // card for displaying note details
 // plus edit/delete functionality
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
 import NoteEditFormModal from "../Note/NoteEditFormModal";
 import SwipeableCard from "../Card/SwipeableCard";
 
-import Colors from "../../modules/Colors";
 import { removeItem } from "../../modules/APIManager";
 
 const NoteCard = props => {
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
-  // const [isLoading, setIsLoading] = useState(true);
 
   const removeNoteCard = async () => {
     await removeItem("notes", Number(props.note.id));
@@ -47,21 +45,9 @@ const NoteCard = props => {
     props.closeSelf(props.cardIndex);
     setIsEditFormVisible(true);
   };
-  // const onPress = () => {
-  //   props.navigation.navigate("Retro", {
-  //     noteId: props.cardId
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   setIsLoading(false);
-  // }, []);
-
   return (
     <SwipeableCard
       {...props}
-      // handlePress={onPress}
-      // isLoading={isLoading}
       onLeftSwipe={onLeftSwipe}
       onRightSwipe={onRightSwipe}>
       <View>
@@ -97,7 +83,6 @@ const styles = StyleSheet.create({
   cardDescription: {
     margin: 8,
     fontSize: 20,
-    // color: "white",
     textAlign: "center"
   }
 });

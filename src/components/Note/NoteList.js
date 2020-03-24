@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, FlatList, Alert } from "react-native";
+import { StyleSheet, View, Text, FlatList } from "react-native";
 
 import FormModalContainer from "../Note/NoteFormModal";
 import NoteCard from "./NoteCard";
