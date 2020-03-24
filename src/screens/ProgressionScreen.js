@@ -19,6 +19,9 @@ const ProgressionScreen = props => {
   const loadProgressions = async () => {
     const progressions = await getProgressionsHandler();
     setProgressions(progressions);
+    if (progressions.length === 0) {
+      addProgressionHandler();
+    }
   };
 
   useEffect(() => {

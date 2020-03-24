@@ -9,6 +9,7 @@ import SwipeableCard from "../Card/SwipeableCard";
 
 import Colors from "../../modules/Colors";
 import { patchItem, removeItem } from "../../modules/APIManager";
+import { formatDate } from "../../modules/FormatDate";
 
 const ActionItemCard = props => {
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
@@ -82,7 +83,17 @@ const ActionItemCard = props => {
         }>
         <View style={{ backgroundColor: "white" }}>
           <View style={{ ...styles.card, ...props.style }}>
-            <Text style={styles.cardText}>{props.actionItem.description}</Text>
+            <Text style={styles.cardDescription}>
+              {props.actionItem.description}
+            </Text>
+            <View style={styles.cardTimestamp}>
+              <Text style={styles.timestampText}>
+                {props.actionItem.created_by.username}
+              </Text>
+              <Text style={styles.timestampText}>
+                {formatDate(props.actionItem.created_at)}
+              </Text>
+            </View>
           </View>
           <ActionItemEditFormModal
             onConfirm={onEditConfirm}
@@ -99,21 +110,37 @@ const ActionItemCard = props => {
 const styles = StyleSheet.create({
   card: {
     width: "100%",
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center",
+    // height: 60,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    // alignItems: "flex-start",
     borderBottomWidth: 0.5,
     paddingVertical: 5,
     backgroundColor: Colors.light.background.content
   },
-  cardText: {
-    fontSize: 20
-  },
   cardDescription: {
-    fontSize: 14
+    margin: 8,
+    fontSize: 20,
+    textAlign: "left",
+    width: "70%"
+  },
+  cardTimestamp: {
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    // alignSelf: "flex-end",
+    paddingHorizontal: 5
+    // borderTopWidth: 0.5,
+    // borderLeftWidth: 0.5,
+    // backgroundColor: "white"
+    // borderTopLeftRadius: 5,
+    // paddingBottom: 2
   },
   completedCard: {
     backgroundColor: Colors.light.background.subHeader
+  },
+  timestampText: {
+    fontSize: 12
   }
 });
 

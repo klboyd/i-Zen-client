@@ -11,7 +11,7 @@ const Colors = {
       primary: "#46b4afaa",
       secondary: "#464bb4aa",
       negative: "#dc143c",
-      neutral: "#b47846"
+      neutral: "#b47846aa"
     },
     text: {
       primary: "#ddd"

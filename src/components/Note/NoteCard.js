@@ -8,6 +8,7 @@ import NoteEditFormModal from "../Note/NoteEditFormModal";
 import SwipeableCard from "../Card/SwipeableCard";
 
 import { removeItem } from "../../modules/APIManager";
+import { formatDate } from "../../modules/FormatDate";
 
 const NoteCard = props => {
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
@@ -54,6 +55,14 @@ const NoteCard = props => {
         <View style={{ backgroundColor: "white" }}>
           <View style={{ ...styles.card, ...props.style }}>
             <Text style={styles.cardDescription}>{props.note.description}</Text>
+            <View style={styles.cardTimestamp}>
+              <Text style={styles.timestampText}>
+                {props.note.created_by.username}
+              </Text>
+              <Text style={styles.timestampText}>
+                {formatDate(props.note.created_at)}
+              </Text>
+            </View>
           </View>
         </View>
         <NoteEditFormModal
@@ -72,18 +81,32 @@ const styles = StyleSheet.create({
   card: {
     width: "100%",
     minHeight: 60,
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    // alignItems: "flex-start",
     borderBottomWidth: 0.5,
     paddingVertical: 5
-  },
-  cardText: {
-    fontSize: 20
   },
   cardDescription: {
     margin: 8,
     fontSize: 20,
-    textAlign: "center"
+    textAlign: "left",
+    width: "70%"
+  },
+  cardTimestamp: {
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    // alignSelf: "flex-end",
+    paddingHorizontal: 5
+    // borderTopWidth: 0.5,
+    // borderLeftWidth: 0.5,
+    // backgroundColor: "white"
+    // borderTopLeftRadius: 5,
+    // paddingBottom: 2
+  },
+  timestampText: {
+    fontSize: 12
   }
 });
 

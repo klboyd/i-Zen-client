@@ -94,6 +94,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 20
+  },
+  buttonText: {
+    color: Colors.light.text.primary
   }
 });
 

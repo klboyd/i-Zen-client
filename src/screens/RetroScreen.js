@@ -18,6 +18,9 @@ const RetroScreen = props => {
   const loadRetros = async () => {
     const retros = await getRetrosHandler();
     setRetros(retros);
+    if (retros.length === 0) {
+      addRetroHandler();
+    }
   };
 
   const createRetro = async () => {
