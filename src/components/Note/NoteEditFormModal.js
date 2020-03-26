@@ -1,6 +1,6 @@
 // form modal for editing a note
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
 import FormModalContainer from "../Modal/FormModalContainer";
@@ -55,7 +55,6 @@ const NoteEditFormModal = props => {
           inputStyle={styles.inputField}
           placeholder={`Enter something ${props.boardDetails.type}!`}
           value={description}
-          // autoCapitalize="none"
           onChangeText={setDescription}
         />
       </View>
@@ -63,12 +62,12 @@ const NoteEditFormModal = props => {
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.secondary }}
           onPress={cancelFormHandler}>
-          <Text>Cancel</Text>
+          <Text style={styles.buttonText}>Cancel</Text>
         </ZenButton>
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={confirmFormHandler}>
-          <Text>Save</Text>
+          <Text style={styles.buttonText}>Save</Text>
         </ZenButton>
       </View>
     </FormModalContainer>
@@ -91,12 +90,13 @@ const styles = StyleSheet.create({
     width: "85%"
   },
   buttonContainer: {
-    // flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // width: "80%",
     marginTop: 20
+  },
+  buttonText: {
+    color: Colors.light.text.primary
   }
 });
 

@@ -1,7 +1,7 @@
 // modal container for forms
 
 import React from "react";
-import { StyleSheet, View, Text, Modal } from "react-native";
+import { StyleSheet, View, Modal } from "react-native";
 
 const FormModalContainer = props => {
   return (

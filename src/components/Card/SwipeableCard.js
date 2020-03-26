@@ -1,7 +1,7 @@
 // swipeable card template for consistent styling
 
 import React from "react";
-import { StyleSheet, Animated, Alert, View } from "react-native";
+import { StyleSheet, Animated, View } from "react-native";
 
 import { Swipeable, TouchableHighlight } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
@@ -10,7 +10,6 @@ import Colors from "../../modules/Colors";
 
 const SwipeableCard = props => {
   const renderLeftActions = (progress, dragX) => {
-    // if (props.isLoading === false) {
     const trans = dragX.interpolate({
       inputRange: [0, 50, 100, 101],
       outputRange: [-20, 0, 0, 1],
@@ -32,7 +31,6 @@ const SwipeableCard = props => {
     // }
   };
   const renderRightActions = (progress, dragX) => {
-    // if (props.isLoading === false) {
     if (props.onRightSwipe) {
       const trans = dragX.interpolate({
         inputRange: [-101, -100, -50, 0],

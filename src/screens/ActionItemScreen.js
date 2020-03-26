@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, FlatList, Text, View, Alert } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 
 import ActionItemFormModal from "../components/ActionItem/ActionItemFormModal";
 import ActionItemCard from "../components/ActionItem/ActionItemCard";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
-import ZenButton from "../components/ButtonComponent/ZenButton";
 
 import Colors from "../modules/Colors";
 import { getAll } from "../modules/APIManager";
@@ -24,6 +23,7 @@ const ActionItemScreen = props => {
   const addActionItemHandler = () => setIsFormVisible(true);
 
   const loadActionItems = async () => {
+    await props.route.params.getActionItemCount();
     return await getActionItemsHandler();
   };
 

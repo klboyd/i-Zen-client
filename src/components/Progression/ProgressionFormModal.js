@@ -47,7 +47,6 @@ const ProgressionFormModal = props => {
           inputStyle={styles.inputField}
           placeholder="ex: Cooking More Meals"
           value={name}
-          // autoCapitalize="none"
           onChangeText={setName}
         />
         <Text>Why do you want to improve this?</Text>
@@ -58,7 +57,6 @@ const ProgressionFormModal = props => {
           inputStyle={styles.inputField}
           placeholder="ex: To stop eating so much fast food"
           value={description}
-          // autoCapitalize="none"
           onChangeText={setDescription}
         />
       </View>
@@ -66,12 +64,12 @@ const ProgressionFormModal = props => {
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.secondary }}
           onPress={cancelFormHandler}>
-          <Text>Cancel</Text>
+          <Text style={styles.buttonText}>Cancel</Text>
         </ZenButton>
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={confirmFormHandler}>
-          <Text>Add</Text>
+          <Text style={styles.buttonText}>Add</Text>
         </ZenButton>
       </View>
     </FormModalContainer>
@@ -94,12 +92,13 @@ const styles = StyleSheet.create({
     width: "85%"
   },
   buttonContainer: {
-    // flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // width: "80%",
     marginTop: 20
+  },
+  buttonText: {
+    color: Colors.light.text.primary
   }
 });
 

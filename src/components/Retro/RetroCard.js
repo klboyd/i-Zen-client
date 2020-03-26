@@ -1,7 +1,7 @@
 // card for displaying retro details
 // plus edit/delete functionality
 
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
 import SwipeableCard from "../Card/SwipeableCard";
@@ -37,7 +37,8 @@ const RetroCard = props => {
   const onPress = () => {
     props.navigation.navigate("Notes", {
       retroId: props.cardId,
-      progressionId: props.progressionId
+      progressionId: props.progressionId,
+      getActionItemCount: props.getActionItemCount
     });
   };
   return (

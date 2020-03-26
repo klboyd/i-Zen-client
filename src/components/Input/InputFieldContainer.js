@@ -1,7 +1,7 @@
 // input field container for consistent styling
 
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import InputField from "./InputField";
 

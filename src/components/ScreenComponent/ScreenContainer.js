@@ -1,7 +1,7 @@
 // container for screens for consistent styling
 
 import React from "react";
-import { StyleSheet, View, Text, Alert } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import FooterComponent from "../Footer/FooterComponent";
 import ZenButton from "../ButtonComponent/ZenButton";
 
@@ -40,11 +40,8 @@ const ScreenContainer = props => {
 
 const styles = StyleSheet.create({
   screen: {
-    // marginTop: 20,
-    // marginBottom: 50,
     borderTopWidth: 1,
     flex: 1,
-    // width: "100%",
     alignItems: "center",
     justifyContent: "flex-start"
   },

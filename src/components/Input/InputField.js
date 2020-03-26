@@ -1,7 +1,7 @@
 // input field template for consistent styling
 
 import React from "react";
-import { StyleSheet, TextInput, ShadowPropTypesIOS } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 
 const InputField = props => {
   return (

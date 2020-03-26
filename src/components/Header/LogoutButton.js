@@ -3,7 +3,7 @@ import { StyleSheet, Text } from "react-native";
 import Colors from "../../modules/Colors";
 import ZenButton from "../ButtonComponent/ZenButton";
 
-const HeaderButton = props => {
+const LogoutButton = props => {
   return (
     <ZenButton
       customStyle={{ backgroundColor: Colors.light.button.secondary }}
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HeaderButton;
+export default LogoutButton;

@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList, Text, Alert } from "react-native";
 
-import FooterComponent from "../components/Footer/FooterComponent";
 import RetroCard from "../components/Retro/RetroCard";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
-import ZenButton from "../components/ButtonComponent/ZenButton";
 
-import Colors from "../modules/Colors";
 import { getAll, postItem } from "../modules/APIManager";
 
 const RetroScreen = props => {
@@ -21,6 +18,9 @@ const RetroScreen = props => {
   const loadRetros = async () => {
     const retros = await getRetrosHandler();
     setRetros(retros);
+    if (retros.length === 0) {
+      addRetroHandler();
+    }
   };
 
   const createRetro = async () => {
@@ -51,7 +51,8 @@ const RetroScreen = props => {
   };
   const onOpenActionItems = () =>
     props.navigation.navigate("Action Items", {
-      progressionId: props.route.params.progressionId
+      progressionId: props.route.params.progressionId,
+      getActionItemCount: props.route.params.getActionItemCount
     });
 
   useEffect(() => {
@@ -81,6 +82,7 @@ const RetroScreen = props => {
         data={retros}
         renderItem={retro => (
           <RetroCard
+            getActionItemCount={props.route.params.getActionItemCount}
             row={row}
             prevOpenedRow={prevOpenedRow}
             closeRow={closeRow}

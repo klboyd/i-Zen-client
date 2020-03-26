@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, FlatList, Text, View, Alert } from "react-native";
+import { StyleSheet } from "react-native";
 
-import FooterComponent from "../components/Footer/FooterComponent";
-// import NoteFormModal from "../components/Note/NoteFormModal";
 import ScreenContainer from "../components/ScreenComponent/ScreenContainer";
-import ZenButton from "../components/ButtonComponent/ZenButton";
-
-import Colors from "../modules/Colors";
 import { getAll } from "../modules/APIManager";
 import NoteList from "../components/Note/NoteList";
 
@@ -38,7 +33,8 @@ const NoteScreen = props => {
 
   const onOpenActionItems = () =>
     props.navigation.navigate("Action Items", {
-      progressionId: props.route.params.progressionId
+      progressionId: props.route.params.progressionId,
+      getActionItemCount: props.route.params.getActionItemCount
     });
 
   useEffect(() => {
@@ -70,7 +66,6 @@ const styles = StyleSheet.create({
   addButtonText: {
     padding: 3,
     fontSize: 14
-    // color: "white"
   }
 });
 
