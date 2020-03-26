@@ -30,6 +30,10 @@ Install [Expo](https://expo.io/learn) by
 - [Android Studio Emulator](https://docs.expo.io/versions/latest/workflow/android-studio-emulator/)
 - [iOS Simulator](https://docs.expo.io/versions/v36.0.0/workflow/ios-simulator/)
 
+#### Run the iZen API
+
+Follow the instructions [here](https://github.com/klb417/i-Zen-api#izen-api) to set up and run the iZen API
+
 ## Install iZen
 
 Follow these instructions to get iZen running.

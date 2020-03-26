@@ -57,7 +57,7 @@ const NoteCard = props => {
             <Text style={styles.cardDescription}>{props.note.description}</Text>
             <View style={styles.cardTimestamp}>
               <Text style={styles.timestampText}>
-                {props.note.created_by.username}
+                by {props.note.created_by.username}{" "}
               </Text>
               <Text style={styles.timestampText}>
                 {formatDate(props.note.created_at)}
@@ -81,20 +81,19 @@ const styles = StyleSheet.create({
   card: {
     width: "100%",
     minHeight: 60,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between",
     // alignItems: "flex-start",
     borderBottomWidth: 0.5,
-    paddingVertical: 5
+    paddingHorizontal: 5
   },
   cardDescription: {
     margin: 8,
     fontSize: 20,
-    textAlign: "left",
-    width: "70%"
+    textAlign: "left"
   },
   cardTimestamp: {
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "flex-end",
     // alignSelf: "flex-end",

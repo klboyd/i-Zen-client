@@ -21,7 +21,7 @@ const Colors = {
       negative: "#dc143c55"
     },
     actionCard: {
-      completed: "#82b446cc",
+      completed: "#82b44655",
       pending: "#eeeeee"
     }
   }

@@ -4,6 +4,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Alert } from "react-native";
 
+import { Ionicons } from "@expo/vector-icons";
+
 import ActionItemEditFormModal from "./ActionItemEditFormModal";
 import SwipeableCard from "../Card/SwipeableCard";
 
@@ -83,12 +85,27 @@ const ActionItemCard = props => {
         }>
         <View style={{ backgroundColor: "white" }}>
           <View style={{ ...styles.card, ...props.style }}>
-            <Text style={styles.cardDescription}>
-              {props.actionItem.description}
-            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                width: "90%"
+              }}>
+              {props.actionItem.status.name === "completed" && (
+                <Ionicons
+                  style={{ marginHorizontal: 5, alignSelf: "center" }}
+                  name="md-checkmark"
+                  size={32}
+                  color={Colors.light.button.primary}
+                />
+              )}
+              <Text style={styles.cardDescription}>
+                {props.actionItem.description}
+              </Text>
+            </View>
             <View style={styles.cardTimestamp}>
               <Text style={styles.timestampText}>
-                {props.actionItem.created_by.username}
+                by {props.actionItem.created_by.username}{" "}
               </Text>
               <Text style={styles.timestampText}>
                 {formatDate(props.actionItem.created_at)}
@@ -110,10 +127,11 @@ const ActionItemCard = props => {
 const styles = StyleSheet.create({
   card: {
     width: "100%",
-    paddingHorizontal: 20,
-    flexDirection: "row",
+    minHeight: 60,
+    paddingHorizontal: 5,
+    flexDirection: "column",
     justifyContent: "space-between",
-    alignItems: "center",
+    // alignItems: "center",
     borderBottomWidth: 0.5,
     paddingVertical: 5,
     backgroundColor: Colors.light.background.content
@@ -121,15 +139,14 @@ const styles = StyleSheet.create({
   cardDescription: {
     // margin: 8,
     fontSize: 20,
-    textAlign: "left",
-    width: "70%"
+    textAlign: "left"
   },
   cardTimestamp: {
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "flex-end",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
     // alignSelf: "flex-end",
-    // paddingHorizontal: 5
+    paddingHorizontal: 5
     // borderTopWidth: 0.5,
     // borderLeftWidth: 0.5,
     // backgroundColor: "white"
