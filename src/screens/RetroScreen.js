@@ -51,7 +51,8 @@ const RetroScreen = props => {
   };
   const onOpenActionItems = () =>
     props.navigation.navigate("Action Items", {
-      progressionId: props.route.params.progressionId
+      progressionId: props.route.params.progressionId,
+      getActionItemCount: props.route.params.getActionItemCount
     });
 
   useEffect(() => {
@@ -81,6 +82,7 @@ const RetroScreen = props => {
         data={retros}
         renderItem={retro => (
           <RetroCard
+            getActionItemCount={props.route.params.getActionItemCount}
             row={row}
             prevOpenedRow={prevOpenedRow}
             closeRow={closeRow}

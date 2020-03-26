@@ -23,6 +23,7 @@ const ActionItemScreen = props => {
   const addActionItemHandler = () => setIsFormVisible(true);
 
   const loadActionItems = async () => {
+    await props.route.params.getActionItemCount();
     return await getActionItemsHandler();
   };
 

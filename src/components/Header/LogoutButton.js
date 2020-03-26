@@ -1,16 +1,14 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
-
+import Colors from "../../modules/Colors";
 import ZenButton from "../ButtonComponent/ZenButton";
 
-import Colors from "../../modules/Colors";
-
-const AddButton = props => {
+const LogoutButton = props => {
   return (
     <ZenButton
-      customStyle={{ backgroundColor: Colors.light.button.primary }}
+      customStyle={{ backgroundColor: Colors.light.button.secondary }}
       {...props}>
-      <Text style={styles.buttonText}>Add</Text>
+      <Text style={styles.buttonText}>Logout</Text>
     </ZenButton>
   );
 };
@@ -19,11 +17,8 @@ const styles = StyleSheet.create({
   buttonText: {
     padding: 3,
     fontSize: 14,
-    color: "white"
-  },
-  buttonText: {
     color: Colors.light.text.primary
   }
 });
 
-export default AddButton;
+export default LogoutButton;

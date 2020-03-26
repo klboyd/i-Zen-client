@@ -110,16 +110,16 @@ const ActionItemCard = props => {
 const styles = StyleSheet.create({
   card: {
     width: "100%",
-    // height: 60,
+    paddingHorizontal: 20,
     flexDirection: "row",
     justifyContent: "space-between",
-    // alignItems: "flex-start",
+    alignItems: "center",
     borderBottomWidth: 0.5,
     paddingVertical: 5,
     backgroundColor: Colors.light.background.content
   },
   cardDescription: {
-    margin: 8,
+    // margin: 8,
     fontSize: 20,
     textAlign: "left",
     width: "70%"
@@ -127,9 +127,9 @@ const styles = StyleSheet.create({
   cardTimestamp: {
     flexDirection: "column",
     justifyContent: "flex-end",
-    alignItems: "flex-end",
+    alignItems: "flex-end"
     // alignSelf: "flex-end",
-    paddingHorizontal: 5
+    // paddingHorizontal: 5
     // borderTopWidth: 0.5,
     // borderLeftWidth: 0.5,
     // backgroundColor: "white"

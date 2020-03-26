@@ -1,7 +1,7 @@
 // generic button template for consistent styling
 
 import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
 import Colors from "../../modules/Colors";
 
@@ -13,7 +13,7 @@ const ZenButton = ({ customStyle, ...props }) => {
 
   return (
     <TouchableOpacity activeOpacity={0.6} style={buttonStyle} {...props}>
-      {props.children}
+      <Text style={styles.buttonText}>{props.children}</Text>
     </TouchableOpacity>
   );
 };
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     padding: 3,
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: "bold",
     color: "white"
   }
 });

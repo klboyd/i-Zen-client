@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
 
-import HeaderButton from "./src/components/Header/HeaderButton";
+import LogoutButton from "./src/components/Header/LogoutButton";
 
 import Colors from "./src/modules/Colors";
 import { logout } from "./src/modules/APIManager";
@@ -73,10 +73,10 @@ export default function App() {
                 headerStyle: styles.headerStyle,
                 headerTitleAlign: "center",
                 // headerLeft: () => (
-                //   <HeaderButton title="Logout" onPress={logoutHandler} />
+                //   <LogoutButton title="Logout" onPress={logoutHandler} />
                 // ),
                 headerRight: () => (
-                  <HeaderButton title="Logout" onPress={logoutHandler} />
+                  <LogoutButton title="Logout" onPress={logoutHandler} />
                   // <Ionicons
                   //   style={{ paddingHorizontal: 20 }}
                   //   name="md-person"
