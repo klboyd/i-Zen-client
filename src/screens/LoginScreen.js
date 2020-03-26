@@ -49,11 +49,14 @@ const LoginScreen = props => {
       />
       <View style={styles.buttonContainer}>
         <ZenButton
-          customStyle={{ backgroundColor: Colors.light.button.secondary }}
+          customStyle={{
+            backgroundColor: Colors.light.button.secondary,
+            width: 100
+          }}
           onPress={() => props.navigation.navigate("Register")}>
           <Text style={styles.buttonText}>Register</Text>
         </ZenButton>
-        <Text style={styles.buttonChoiceText}>or</Text>
+        {/* <Text style={styles.buttonChoiceText}>or</Text> */}
         <ZenButton
           customStyle={{ backgroundColor: Colors.light.button.primary }}
           onPress={loginHandler}>

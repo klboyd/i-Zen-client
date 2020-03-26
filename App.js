@@ -77,12 +77,6 @@ export default function App() {
                 // ),
                 headerRight: () => (
                   <LogoutButton title="Logout" onPress={logoutHandler} />
-                  // <Ionicons
-                  //   style={{ paddingHorizontal: 20 }}
-                  //   name="md-person"
-                  //   size={32}
-                  //   color="black"
-                  // />
                 )
               }}>
               {props => <ProgressionScreen {...props} />}

@@ -94,7 +94,10 @@ const RegisterScreen = props => {
       />
       <View style={styles.buttonContainer}>
         <ZenButton
-          customStyle={styles.button}
+          customStyle={{
+            backgroundColor: Colors.light.button.primary,
+            width: 100
+          }}
           color={Colors.light.button.secondary}
           onPress={registerNewUserHandler}
           title="Register">

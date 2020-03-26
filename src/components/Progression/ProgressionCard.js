@@ -2,13 +2,17 @@
 // plus edit/delete functionality
 
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Alert } from "react-native";
+import { StyleSheet, View, Text, Alert, YellowBox } from "react-native";
 
 import ProgressionEditFormModal from "../Progression/ProgressionEditFormModal";
 import SwipeableCard from "../Card/SwipeableCard";
 
 import Colors from "../../modules/Colors";
 import { removeItem, getAll } from "../../modules/APIManager";
+
+YellowBox.ignoreWarnings([
+  "Non-serializable values were found in the navigation state"
+]);
 
 const ProgressionCard = props => {
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
